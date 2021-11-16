@@ -13,7 +13,8 @@ namespace KnowBetter_WebApp.Controllers
     public class UsersController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
-
+        
+        // ADD LOGIN AND REGISTER FUNCTIONALITY
         public UsersController(KnowBetter_WebAppContext context)
         {
             _context = context;
