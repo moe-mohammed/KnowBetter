@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Luminary\\source\\repos\\KnowBetter-WebApp\\KnowBetter-WebApp\\KnowBetter-WebApp.csproj": {}
+    "C:\\Users\\nicou\\OneDrive\\Documents\\School\\Fall 2021\\ISIT 320\\KnowBetter\\KnowBetter-WebApp\\KnowBetter-WebApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Luminary\\source\\repos\\KnowBetter-WebApp\\KnowBetter-WebApp\\KnowBetter-WebApp.csproj": {
+    "C:\\Users\\nicou\\OneDrive\\Documents\\School\\Fall 2021\\ISIT 320\\KnowBetter\\KnowBetter-WebApp\\KnowBetter-WebApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Luminary\\source\\repos\\KnowBetter-WebApp\\KnowBetter-WebApp\\KnowBetter-WebApp.csproj",
+        "projectUniqueName": "C:\\Users\\nicou\\OneDrive\\Documents\\School\\Fall 2021\\ISIT 320\\KnowBetter\\KnowBetter-WebApp\\KnowBetter-WebApp.csproj",
         "projectName": "KnowBetter-WebApp",
-        "projectPath": "C:\\Users\\Luminary\\source\\repos\\KnowBetter-WebApp\\KnowBetter-WebApp\\KnowBetter-WebApp.csproj",
-        "packagesPath": "C:\\Users\\Luminary\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Luminary\\source\\repos\\KnowBetter-WebApp\\KnowBetter-WebApp\\obj\\",
+        "projectPath": "C:\\Users\\nicou\\OneDrive\\Documents\\School\\Fall 2021\\ISIT 320\\KnowBetter\\KnowBetter-WebApp\\KnowBetter-WebApp.csproj",
+        "packagesPath": "C:\\Users\\nicou\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nicou\\OneDrive\\Documents\\School\\Fall 2021\\ISIT 320\\KnowBetter\\KnowBetter-WebApp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Luminary\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\nicou\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

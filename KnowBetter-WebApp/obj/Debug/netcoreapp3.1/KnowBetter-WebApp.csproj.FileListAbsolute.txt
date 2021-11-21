@@ -153,3 +153,13 @@ C:\Users\Luminary\source\repos\KnowBetter-WebApp\KnowBetter-WebApp\obj\Debug\net
 C:\Users\Luminary\source\repos\KnowBetter-WebApp\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\Edit.cshtml.g.cs
 C:\Users\Luminary\source\repos\KnowBetter-WebApp\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\Index.cshtml.g.cs
 C:\Users\Luminary\source\repos\KnowBetter-WebApp\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\Razor\Views\Users\Login.cshtml.g.cs
+C:\Users\nicou\OneDrive\Documents\School\Fall 2021\ISIT 320\KnowBetter\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\KnowBetter-WebApp.csproj.AssemblyReference.cache
+C:\Users\nicou\OneDrive\Documents\School\Fall 2021\ISIT 320\KnowBetter\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\KnowBetter-WebApp.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nicou\OneDrive\Documents\School\Fall 2021\ISIT 320\KnowBetter\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\KnowBetter-WebApp.AssemblyInfoInputs.cache
+C:\Users\nicou\OneDrive\Documents\School\Fall 2021\ISIT 320\KnowBetter\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\KnowBetter-WebApp.AssemblyInfo.cs
+C:\Users\nicou\OneDrive\Documents\School\Fall 2021\ISIT 320\KnowBetter\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\KnowBetter-WebApp.csproj.CoreCompileInputs.cache
+C:\Users\nicou\OneDrive\Documents\School\Fall 2021\ISIT 320\KnowBetter\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\KnowBetter-WebApp.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\nicou\OneDrive\Documents\School\Fall 2021\ISIT 320\KnowBetter\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\KnowBetter-WebApp.RazorAssemblyInfo.cache
+C:\Users\nicou\OneDrive\Documents\School\Fall 2021\ISIT 320\KnowBetter\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\KnowBetter-WebApp.RazorAssemblyInfo.cs
+C:\Users\nicou\OneDrive\Documents\School\Fall 2021\ISIT 320\KnowBetter\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\KnowBetter-WebApp.dll
+C:\Users\nicou\OneDrive\Documents\School\Fall 2021\ISIT 320\KnowBetter\KnowBetter-WebApp\obj\Debug\netcoreapp3.1\KnowBetter-WebApp.pdb
