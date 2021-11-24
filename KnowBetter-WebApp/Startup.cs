@@ -29,6 +29,10 @@ namespace KnowBetter_WebApp
 
             services.AddDbContext<KnowBetter_WebAppContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("KnowBetter_WebAppContext")));
+
+            var sp = services.BuildServiceProvider();
+            KnowBetter_WebAppContext context = sp.GetService<KnowBetter_WebAppContext>();
+            DataSeeder.SeedProducts(context);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
