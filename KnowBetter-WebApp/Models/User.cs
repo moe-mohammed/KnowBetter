@@ -11,6 +11,9 @@ namespace KnowBetter_WebApp.Models
         public string UserId { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public string Age { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         // Since there's no array type mapping in EF, we'll use a string with ingredients separated using commas.
         // This string will be stored in the database called InternalAvoidIngredients.

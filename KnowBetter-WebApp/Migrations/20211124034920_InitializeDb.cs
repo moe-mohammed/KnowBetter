@@ -2,7 +2,7 @@
 
 namespace KnowBetter_WebApp.Migrations
 {
-    public partial class initial : Migration
+    public partial class InitializeDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,13 +50,12 @@ namespace KnowBetter_WebApp.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: false),
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
+                    Age = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Age = table.Column<int>(nullable: false)
+                    LastName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
