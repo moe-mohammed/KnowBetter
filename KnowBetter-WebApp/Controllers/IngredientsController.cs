@@ -10,6 +10,7 @@ using KnowBetter_WebApp.Models;
 
 namespace KnowBetter_WebApp.Controllers
 {
+
     public class IngredientsController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
@@ -18,6 +19,12 @@ namespace KnowBetter_WebApp.Controllers
         {
             _context = context;
         }
+
+        public IActionResult APIView()
+        {
+            return View();
+        }
+
 
         // GET: Ingredients
         public async Task<IActionResult> Index()
