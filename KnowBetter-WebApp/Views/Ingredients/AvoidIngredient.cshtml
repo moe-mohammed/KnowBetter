@@ -1,6 +1,42 @@
-﻿@model KnowBetter_WebApp.Models.UserAvoidIngredient
+﻿@model IEnumerable<KnowBetter_WebApp.Models.UserAvoidIngredient>
 
-    @{
-        ViewData["Title"] = "AvoidIngredient";
-    }
-<h1>This is the avoid ingredient page!!!</h1>
+@{
+    ViewData["Title"] = "FavoriteIngredient";
+}
+
+<h1>Avoid Ingredients</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserAvoidIngredientId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserAvoidIngredientId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UserAvoidIngredientId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UserAvoidIngredientId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserAvoidIngredientId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
