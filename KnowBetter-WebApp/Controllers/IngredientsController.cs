@@ -25,6 +25,21 @@ namespace KnowBetter_WebApp.Controllers
             return View(await _context.Ingredient.ToListAsync());
         }
 
+        public async Task<IActionResult> FavoriteIngredient()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> AvoidIngredient()
+        { 
+            return View();
+        }
+
+        public async Task<IActionResult> IngredientLibrary()
+        {
+            return View();
+        }
+
         // GET: Ingredients/Details/5
         public async Task<IActionResult> Details(int? id)
         {

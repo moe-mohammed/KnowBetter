@@ -5,12 +5,13 @@
     @{
         ViewData["Title"] = "Library";
     }
-
-<h2><a href="@Url.Action("Index", "UserFavoriteIngredients")">
+<div>
+<h2><a href="@Url.Action("FavoriteIngredient", "Ingredients")">
     Favorite Ingredients
 </a></h2>
-<\ br>
+<br>
 
-<h2><a> href="@Url.Action("Index", "UserAvoidIngredients")">
+<h2><a href="@Url.Action("AvoidIngredient", "Ingredients")">
     Avoid Ingredients
 </a></h2>
+</div>
