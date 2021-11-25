@@ -1,6 +1,42 @@
-﻿@model KnowBetter_WebApp.Models.UserFavoriteIngredient
+﻿@model IEnumerable<KnowBetter_WebApp.Models.UserFavoriteIngredient>
 
 @{
     ViewData["Title"] = "FavoriteIngredient";
 }
-<h1>This is the favorite ingredient page!!!</h1>
+
+<h1>Favorite Ingredients</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserFavoriteIngredientId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserFavoriteIngredientId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.UserFavoriteIngredientId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UserFavoriteIngredientId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserFavoriteIngredientId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
