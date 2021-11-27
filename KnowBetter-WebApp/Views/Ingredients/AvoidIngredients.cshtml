@@ -1,0 +1,29 @@
+﻿@model IEnumerable<KnowBetter_WebApp.Models.Ingredient>
+@{
+    ViewData["Title"] = "NewView";
+}
+
+<h1>NewView</h1>
+
+<hr />
+<div class="row">
+    <h4>Ingredient</h4>
+    <div class="col-md-4">
+
+        <form asp-action="NewView">
+            <div class="form-group">
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

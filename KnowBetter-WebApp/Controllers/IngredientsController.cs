@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+//using ASP;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -25,17 +26,66 @@ namespace KnowBetter_WebApp.Controllers
             return View(await _context.Ingredient.ToListAsync());
         }
 
-        public async Task<IActionResult> FavoriteIngredient()
+        //public async Task<IActionResult> GetUserAvoidIngredients(string userId)
+        //{
+        //    List<UserAvoidIngredient> avoidIngredient = _context.UserAvoidIngredient.Where(uai => uai.UserId == userId).toList();
+
+
+        //}
+
+        //public async Task<IActionResult> AvoidIngredients()
+        //{
+        //    string userId = "1";
+        //    List<Ingredient> ingredients = _context.Ingredient.ToList();
+        //    if (ingredients != null)
+        //    {
+        //        ViewBag.data = ingredients;
+        //    }
+
+        //    return View(userId);
+        //}
+
+        // POST: Ingredients/AddAvoid
+        // Adds avoid ingredient to a user
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddAvoid(int userId, [Bind("IngredientId,IngredientName")] Ingredient ingredient)
         {
-            return View();
+            
+            if (ModelState.IsValid)
+            {
+                UserAvoidIngredient uai = new UserAvoidIngredient() {
+                    IngredientId = ingredient.IngredientId,
+                    UserId = userId
+                };
+                _context.UserAvoidIngredient.Add(uai);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(ingredient);
         }
 
-        public async Task<IActionResult> AvoidIngredient()
-        { 
-            return View();
-        }
+        //public async Task<IActionResult> FavoriteIngredient(int? userId)
+        //{
+        //    if (userId == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-        public async Task<IActionResult> IngredientLibrary()
+        //    return View(userId);
+        //}
+
+        //public async Task<IActionResult> AvoidIngredient(int? userId)
+        //{
+        //    if (userId == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(userId);
+        //}
+
+        public IActionResult IngredientLibrary()
         {
             return View();
         }
