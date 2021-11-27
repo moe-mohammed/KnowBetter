@@ -9,6 +9,6 @@ namespace KnowBetter_WebApp.Models
     {
         public int ProductIngredientId { get; set; }
         public int ProductId { get; set; }
-        public int IngeridentId { get; set; }
+        public int IngredientId { get; set; }
     }
 }
