@@ -19,7 +19,7 @@ namespace KnowBetter_WebApp.Data
                 ParseSeed(".\\Data\\KBSeed1.csv", context);
 
                 //Add test user for development purposes
-                User testUser = new User
+                /*User testUser = new User
                 {
                     UserId = "TestUserId",
                     FirstName = "TestFirstName",
@@ -30,6 +30,7 @@ namespace KnowBetter_WebApp.Data
                 };
                 context.User.Add(testUser);
                 context.SaveChanges();
+                */
             }
             
         }
@@ -65,20 +66,17 @@ namespace KnowBetter_WebApp.Data
                 {
                     ingredientName = lineArray[i];
 
-
                     //check if ingredient already exists
-                    try
+                    ingredient = context.Ingredient.FirstOrDefault(i => i.IngredientName == ingredientName);
+                    if (ingredient == null)
                     {
-                        ingredient = context.Ingredient.Single(b => b.IngredientName == ingredientName);
-                    }
-                    //add ingredient if it doesn't exist
-                    catch (System.InvalidOperationException)
-                    {
+                        //add ingredient if it doesn't exist
                         ingredient = new Ingredient { IngredientName = ingredientName };
                         context.Add(ingredient);
                         context.SaveChanges();
                     }
-                    //get IngredientId
+
+                    //get ingredientID
                     ingredientId = ingredient.IngredientId;
 
                     //Add ProductIngredient entry
