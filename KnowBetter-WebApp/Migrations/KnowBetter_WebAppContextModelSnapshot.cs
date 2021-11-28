@@ -71,8 +71,10 @@ namespace KnowBetter_WebApp.Migrations
 
             modelBuilder.Entity("KnowBetter_WebApp.Models.User", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Age")
                         .HasColumnType("nvarchar(max)");
