@@ -9,11 +9,8 @@ namespace KnowBetter_WebApp.Models
 {
     public class UserAvoidIngredient
     {
-        [Key]
         public int UserAvoidIngredientId { get; set; }
-        [ForeignKey("UserId")]
         public int UserId { get; set; }
-        [ForeignKey("IngredientId")]
         public int IngredientId { get; set; }
     }
 }
