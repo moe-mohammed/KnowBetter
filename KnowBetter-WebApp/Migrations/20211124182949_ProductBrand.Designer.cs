@@ -3,14 +3,16 @@ using KnowBetter_WebApp.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KnowBetter_WebApp.Migrations
 {
     [DbContext(typeof(KnowBetter_WebAppContext))]
-    partial class KnowBetter_WebAppContextModelSnapshot : ModelSnapshot
+    [Migration("20211124182949_ProductBrand")]
+    partial class ProductBrand
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,7 +60,7 @@ namespace KnowBetter_WebApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("IngredientId")
+                    b.Property<int>("IngeridentId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
