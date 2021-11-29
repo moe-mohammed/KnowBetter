@@ -13,6 +13,7 @@ namespace KnowBetter_WebApp.Controllers
     public class IngredientsController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
+        private readonly int userId = 1;
 
         public IngredientsController(KnowBetter_WebAppContext context)
         {
@@ -25,17 +26,41 @@ namespace KnowBetter_WebApp.Controllers
             return View(await _context.Ingredient.ToListAsync());
         }
 
-        public async Task<IActionResult> FavoriteIngredient()
+        [HttpPost, ActionName("DeleteFavoriteIngredient")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteFavoriteIngredient(int id)
         {
-            return View();
+            var ingredient =
+                await _context.UserFavoriteIngredient.FirstOrDefaultAsync(favIng =>
+                    favIng.IngredientId == id && favIng.UserId == userId);
+
+            _context.UserFavoriteIngredient.Remove(ingredient);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(FavoriteIngredient));
         }
 
-        public async Task<IActionResult> AvoidIngredient()
+        public async Task<IActionResult> FavoriteIngredient()
+        {
+            List<Ingredient> usersFavoriteIngredients = new List<Ingredient>();
+            List<UserFavoriteIngredient> favIngredients =
+                await _context.UserFavoriteIngredient.Where(fav => fav.UserId == userId).ToListAsync();
+
+            foreach (UserFavoriteIngredient ufi in favIngredients)
+            {
+                Ingredient ingredient =
+                    await _context.Ingredient.FirstOrDefaultAsync(ing => ing.IngredientId == ufi.IngredientId);
+                usersFavoriteIngredients.Add(ingredient);
+            }
+
+            return View(usersFavoriteIngredients);
+        }
+
+        public IActionResult AvoidIngredient()
         { 
             return View();
         }
 
-        public async Task<IActionResult> IngredientLibrary()
+        public IActionResult IngredientLibrary()
         {
             return View();
         }
