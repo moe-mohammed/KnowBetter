@@ -1,6 +1,30 @@
-﻿@model KnowBetter_WebApp.Models.UserFavoriteIngredient
+﻿@model IEnumerable<KnowBetter_WebApp.Models.Ingredient>
 
 @{
-    ViewData["Title"] = "FavoriteIngredient";
+    ViewData["Title"] = "User's Favorite Ingredients";
 }
-<h1>This is the favorite ingredient page!!!</h1>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IngredientName)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IngredientName)
+            </td>
+            <td>
+                <form asp-action="DeleteFavoriteIngredient">
+                    <input type="hidden" name="id" value="@item.IngredientId" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
