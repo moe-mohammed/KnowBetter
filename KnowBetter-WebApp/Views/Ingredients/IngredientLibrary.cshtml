@@ -3,15 +3,24 @@
 *@
 
     @{
-        ViewData["Title"] = "Library";
+        ViewData["Title"] = "IngredientLibrary";
     }
 <div>
-<h2><a href="@Url.Action("FavoriteIngredient", "Ingredients")">
-    Favorite Ingredients
-</a></h2>
-<br>
+    @*<h2>
+        <a href="@Url.Action("FavoriteIngredient", "Ingredients")">
+            Favorite Ingredients
+        </a>
+    </h2>
+    <br>
 
-<h2><a href="@Url.Action("AvoidIngredient", "Ingredients")">
-    Avoid Ingredients
-</a></h2>
+    <h2>
+        <a href="@Url.Action("AvoidIngredient", "Ingredients")">
+            Avoid Ingredients
+        </a>
+    </h2>*@
+    <h2>
+        <a href="@Url.Action("AvoidIngredients", "Ingredients")">
+            AvoidIngredients
+        </a>
+    </h2>
 </div>
