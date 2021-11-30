@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.IO;
 
+
 namespace KnowBetter_WebApp.Data
 {
     public class DataSeeder
@@ -11,7 +12,7 @@ namespace KnowBetter_WebApp.Data
         {
             if (!context.Product.Any())
             {
-                
+
                 /*  Seed file must be prepared before use:
                  *  1. Remove headings
                  *  2. Find and replace single quote (') with 2 single quotes ('')
@@ -32,7 +33,7 @@ namespace KnowBetter_WebApp.Data
                 context.SaveChanges();
                 */
             }
-            
+
         }
 
         public static void ParseSeed(string filePath, KnowBetter_WebAppContext context)
@@ -87,7 +88,7 @@ namespace KnowBetter_WebApp.Data
                 context.SaveChanges();
             }
 
-            
+
         }
     }
 }
