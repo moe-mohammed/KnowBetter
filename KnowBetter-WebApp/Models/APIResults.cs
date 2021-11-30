@@ -5,10 +5,8 @@ using System.Threading.Tasks;
 
 namespace KnowBetter_WebApp.Models
 {
-    public class Ingredient
+    public class APIResults
     {
-        public int IngredientId { get; set; }
-        public string IngredientName { get; set; }
-
+        public Dictionary<string,string> APILinks { get; set; }
     }
 }

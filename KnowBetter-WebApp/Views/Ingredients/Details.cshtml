@@ -1,4 +1,4 @@
-﻿@model KnowBetter_WebApp.Models.Ingredient
+﻿@model KnowBetter_WebApp.Models.APIResultModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,14 +11,21 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IngredientName)
+            @Html.DisplayNameFor(model => model.Ingredient.IngredientName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IngredientName)
+            @Html.DisplayFor(model => model.Ingredient.IngredientName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IngredientId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <p>
+        For more information, here are some links from Wikipedia similar to this ingredient:
+    </p>
+        @foreach(KeyValuePair<string, string>link in Model.APIModel.APILinks)
+            {
+           <p> <a href="@link.Value">@link.Key</a></p>
+            }
+           
+            <a asp-action="Index">Back to List</a>
+    </div>

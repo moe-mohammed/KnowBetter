@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KnowBetter_WebApp.Data;
 using KnowBetter_WebApp.Models;
+using System.IO;
+using System.Net;
+using System.Xml.Serialization;
+
 
 namespace KnowBetter_WebApp.Controllers
 {
@@ -20,10 +24,19 @@ namespace KnowBetter_WebApp.Controllers
             _context = context;
         }
 
-        public IActionResult APIView()
-        {
-            return View();
-        }
+        //public IActionResult APIView(string? name)
+        //{
+        //    //if (name == null)
+        //    //{
+        //    //    return NotFound();
+        //    //}
+
+        //    var model = new APILinksModel();
+        //    string[] links = new string[] { "Link1", "Link2" };
+        //    model.IngredientName = name;
+        //    model.APILinks = links;
+        //    return View(model);
+        //}
 
 
         // GET: Ingredients
@@ -47,7 +60,13 @@ namespace KnowBetter_WebApp.Controllers
                 return NotFound();
             }
 
-            return View(ingredient);
+            var model = new APIResultModel();
+            APIResults aR = new APIResults();
+            aR.APILinks = GetLinks(ingredient);
+            model.APIModel = aR;
+            model.Ingredient = ingredient;
+            
+            return View(model);
         }
 
         // GET: Ingredients/Create
@@ -156,5 +175,42 @@ namespace KnowBetter_WebApp.Controllers
         {
             return _context.Ingredient.Any(e => e.IngredientId == id);
         }
+
+        private Dictionary<string,string> GetLinks(Ingredient ingredient)
+        {
+            string query = ingredient.IngredientName;
+            Dictionary<string, string> links = new Dictionary<string, string>();
+            int numberOfResults = 5;
+
+
+            var webRequest =
+                WebRequest.Create(
+                        "https://en.wikipedia.org/w/api.php?action=opensearch&format=xml&namespace=0&limit="+numberOfResults+"&search="+query)
+                    as HttpWebRequest;
+
+            var s = webRequest.GetResponse().GetResponseStream();
+            XmlSerializer serializer = new XmlSerializer(typeof(APIDeserializer.SearchSuggestion));
+            APIDeserializer.SearchSuggestion ssJ;
+            using (var sr = new StreamReader(s))
+            {
+                ssJ = (APIDeserializer.SearchSuggestion)serializer.Deserialize(sr);
+
+                foreach (APIDeserializer.SearchSuggestionItem item in ssJ.Section)
+                {
+                    links.Add(item.Text.Value,item.Url.Value);
+                }
+
+            }
+
+          
+
+                    
+
+
+            return links;
+        }
+       
     }
-}
+
+      
+    }
