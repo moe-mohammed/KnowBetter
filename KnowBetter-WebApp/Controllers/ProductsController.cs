@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KnowBetter_WebApp.Data;
+using KnowBetter_WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using KnowBetter_WebApp.Data;
-using KnowBetter_WebApp.Models;
+
 
 namespace KnowBetter_WebApp.Controllers
 {

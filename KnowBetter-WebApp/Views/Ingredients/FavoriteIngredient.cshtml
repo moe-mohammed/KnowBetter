@@ -3,28 +3,26 @@
 @{
     ViewData["Title"] = "User's Favorite Ingredients";
 }
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IngredientName)
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IngredientName)
-            </td>
-            <td>
-                <form asp-action="DeleteFavoriteIngredient">
-                    <input type="hidden" name="id" value="@item.IngredientId" />
-                    <input type="submit" value="Delete" class="btn btn-danger" />
-                </form>
-            </td>
-        </tr>
+<h1>Your Favorite Ingredients</h1>
+<div class="container">
+
+    @foreach (var item in Model)
+    {
+
+    
+
+        //  <form asp-action="DeleteFavoriteIngredient">
+         //   <input type="hidden" name="id" value="@item.IngredientId" />
+         //     <input type="submit" value="X" class="btn btn-danger" />
+         //  </form>
+
+    <div class="flex-container">
+        <form class="flex-item" asp-action="DeleteFavoriteIngredient">
+            <input type="hidden"name="id" value="@item.IngredientId" />
+            @Html.DisplayFor(modelItem => item.IngredientName)
+            <input type="submit" value="X" class="btn" />
+        </form>
+    </div>
     }
-    </tbody>
-</table>
+
+</div>
