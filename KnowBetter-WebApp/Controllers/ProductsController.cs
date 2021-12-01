@@ -149,5 +149,15 @@ namespace KnowBetter_WebApp.Controllers
         {
             return _context.Product.Any(e => e.ProductId == id);
         }
+
+        public IActionResult CompareProductSelect()
+        {
+            return View();
+        }
+
+        public IActionResult CompareProductResults()
+        {
+            return View();
+        } 
     }
 }
