@@ -21,8 +21,13 @@ namespace KnowBetter_WebApp.Controllers
         public IActionResult Index()
         {
             return View();
+
         }
 
+        public IActionResult CompareIngDB()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
