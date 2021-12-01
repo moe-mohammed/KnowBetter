@@ -1,8 +1,16 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/UI_Layout.cshtml";
 }
+<h1>KnowBetter</h1>
+<body>
+    <img class="homepageimag" src="~/images/GirlTealBackground.jpg" />
+    <h2><a href="@Url.Action("SignUp","Home")" class="btn btn-primary" style="background-color: rgba(220, 186, 159, 1)">Sign Up </a></h2>
+    <h4 class="catchp">
+        The future of knowlegde based skincare
+    </h4>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+</body>

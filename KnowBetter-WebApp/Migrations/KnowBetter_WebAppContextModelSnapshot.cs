@@ -40,6 +40,9 @@ namespace KnowBetter_WebApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Brand")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
 
@@ -55,7 +58,7 @@ namespace KnowBetter_WebApp.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("IngeridentId")
+                    b.Property<int>("IngredientId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProductId")
@@ -68,8 +71,10 @@ namespace KnowBetter_WebApp.Migrations
 
             modelBuilder.Entity("KnowBetter_WebApp.Models.User", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Age")
                         .HasColumnType("nvarchar(max)");

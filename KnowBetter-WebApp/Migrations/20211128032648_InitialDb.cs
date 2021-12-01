@@ -2,7 +2,7 @@
 
 namespace KnowBetter_WebApp.Migrations
 {
-    public partial class InitializeDb : Migration
+    public partial class InitialDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,7 +25,8 @@ namespace KnowBetter_WebApp.Migrations
                 {
                     ProductId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductName = table.Column<string>(nullable: true)
+                    ProductName = table.Column<string>(nullable: true),
+                    Brand = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,7 +40,7 @@ namespace KnowBetter_WebApp.Migrations
                     ProductIngredientId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(nullable: false),
-                    IngeridentId = table.Column<int>(nullable: false)
+                    IngredientId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,7 +51,8 @@ namespace KnowBetter_WebApp.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     Age = table.Column<string>(nullable: true),
