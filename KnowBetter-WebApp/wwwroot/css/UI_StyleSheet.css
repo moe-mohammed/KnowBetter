@@ -6,9 +6,9 @@
     background-color: rgba(109, 153, 166, 1);
 }
 
-#content {
+/*#content {
     background-color: rgba(229, 229, 229, 1);
-}
+}*/
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
     height: 450px
@@ -20,8 +20,19 @@
     background-color: #f1f1f1;
     height: 100%;
 }
-
-/* Set black background color, white text and some padding */
+.wrapper {
+    padding: .7px 0 0 0;
+}
+#CRimg {
+   height: 70%;
+   width:50%;
+   float: right;
+   padding:0 0 0 10px;
+}
+#resultsDiv {
+    text-align: center;
+    padding: 0 0 0 0;
+}
 footer {
     background-color: rgba(121, 161, 173, 1);
     color: white;
