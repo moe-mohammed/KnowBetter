@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KnowBetter_WebApp.Data;
 using KnowBetter_WebApp.Models;
+using System.Diagnostics;
 
 namespace KnowBetter_WebApp.Controllers
 {
@@ -150,14 +151,83 @@ namespace KnowBetter_WebApp.Controllers
             return _context.Product.Any(e => e.ProductId == id);
         }
 
-        public IActionResult CompareProductSelect()
+        public async Task<IActionResult> CompareProductSelect()
         {
-            return View();
+            //Get all products and send to View
+            return View(await _context.Product.ToListAsync());
         }
 
-        public IActionResult CompareProductResults()
+        public async Task<IActionResult> CompareProductResults(int id)
         {
-            return View();
-        } 
+            //Create list of ingredient names that match ProductId == id
+            List<string> ingredientNames = new List<string>();
+            List<ProductIngredient> productsIngredients =
+                await _context.ProductIngredient.Where(pI => pI.ProductId == id).ToListAsync();
+            foreach (var productIngredient in productsIngredients)
+            {
+                Ingredient ingredient = await _context.Ingredient.FirstOrDefaultAsync(ing =>
+                    ing.IngredientId == productIngredient.IngredientId);
+                ingredientNames.Add(ingredient.IngredientName);
+            }
+            //Convert list of ingredient names to array and pass to compare task
+            return await CompareProductResult(ingredientNames.ToArray());
+        }
+
+        public async Task<IActionResult> CompareProductResult(string[] ingredientNames)
+        {
+            //create list of user avoid ingredient names
+            List<string> userAvoidIngredientNames = new List<string>();
+            //Assumes userID is 1 to match test user.
+            List<UserAvoidIngredient> avoidIngredients =
+                await _context.UserAvoidIngredient.Where(uAI => uAI.UserId == 1).ToListAsync();
+            foreach (var avoidIngredient in avoidIngredients)
+            {
+                Ingredient ingredient = await _context.Ingredient.FirstOrDefaultAsync(ing =>
+                    ing.IngredientId == avoidIngredient.IngredientId);
+                userAvoidIngredientNames.Add(ingredient.IngredientName);
+            }
+            string[] avoidIngArray = userAvoidIngredientNames.ToArray();
+
+            //create list of user favorite ingredient names
+            List<string> userFavoriteIngredientNames = new List<string>();
+            //Assumes userID is 1 to match test user.
+            List<UserFavoriteIngredient> favoriteIngredients =
+                await _context.UserFavoriteIngredient.Where(uFI => uFI.UserId == 1).ToListAsync();
+            foreach (var favoriteIngredient in favoriteIngredients)
+            {
+                Ingredient ingredient = await _context.Ingredient.FirstOrDefaultAsync(ing =>
+                    ing.IngredientId == favoriteIngredient.IngredientId);
+                userFavoriteIngredientNames.Add(ingredient.IngredientName);
+            }
+            string[] favIngArray = userFavoriteIngredientNames.ToArray();
+
+            //compare product ingredients to favorite and avoid lists. Place name and comparison result enum into a new results list.
+            List<CompareIngredientResult> resultsList = new List<CompareIngredientResult>();
+            foreach (string iName in ingredientNames)
+            {
+                CompareIngredientResult result = new CompareIngredientResult();
+                result.IngredientName = iName;
+                result.Result = compResult.Default;
+                foreach (string fName in favIngArray)
+                {
+                    if (iName == fName)
+                    {
+                        result.Result = compResult.Favorite;
+                    }
+                }
+                foreach (string aName in avoidIngArray)
+                {
+                    if (iName == aName)
+                    {
+                        result.Result = compResult.Avoid;
+                    }
+                }
+                resultsList.Add(result);
+            }
+
+            // pass results list to view
+            return View(resultsList);
+        }
+
     }
 }
