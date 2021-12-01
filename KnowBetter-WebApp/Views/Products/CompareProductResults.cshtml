@@ -7,16 +7,15 @@
 </div>
 
 <div class=" wrapper">
-<div id="CRimgdiv">
-    <img id="CRimg"src="~/images/GirlWithFacemask.jpeg" />
-</div>
-    
+    <div id="CRimgdiv">
+        <img id="CRimg"src="~/images/GirlWithFacemask.jpeg" />
+    </div>
     <div id="resultsDiv">
         <h1>Ingredients that match your Favorite or Avoid lists:</h1>
         <div id="ProductCompareResultsContainer">         
                 @foreach (CompareIngredientResult result in Model)
             {
-                <p class="@result.Result.ToString()">@result.IngredientName</p>
+                <span class="@result.Result.ToString()">@result.IngredientName, </span>
             }
         </div>
     </div>
