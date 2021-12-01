@@ -156,6 +156,7 @@ namespace KnowBetter_WebApp.Controllers
             return View(await _context.Product.ToListAsync());
         }
 
+        //Creates list of ingredient names for a specific product
         public async Task<IActionResult> CompareProductResults(int id)
         {
             //Create list of ingredient names that match ProductId == id
@@ -172,6 +173,16 @@ namespace KnowBetter_WebApp.Controllers
             return await CompareProductResult(ingredientNames.ToArray());
         }
 
+        // Used to pass a user-defined list of ingredients to the CompareProductResult function
+        public async Task<IActionResult> CompareIngredientsUserInput(string listOfIngredients)
+        {
+            List<string> highlightedFavorite = new List<string>();
+            List<string> highlightedAvoid = new List<string>();
+            string[] ingredientsNames = listOfIngredients.Split(", ");
+            return await CompareProductResult(ingredientsNames);
+        }
+
+        //Compare array of ingredient names to user avoid ingredients and favorite ingredients
         public async Task<IActionResult> CompareProductResult(string[] ingredientNames)
         {
             //Assume user ID is 1 (for test user)
