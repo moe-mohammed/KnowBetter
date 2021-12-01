@@ -1,0 +1,55 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "CompareIngDB";
+    Layout = "~/Views/Shared/UI_Layout.cshtml";
+}
+
+<div class="DBbackground">
+
+</div>
+<div class="dbbtnclass">
+
+    <div class="dropdown">
+        <button onclick="myFunction()" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown button
+        </button>
+        <div id="myDropdown" class="dropdown-content" aria-labelledby="dropdownMenuButton">
+            <input type="text" placeholder="Search.." class="dropdown-item" id="myInput" onkeyup="filterFunction()">
+            <a href="#about">Product Y</a>
+            <a href="#base">Product T</a>
+            <a href="#blog">Product V</a>
+            <a href="#contact">Product A</a>
+            <a href="#custom">Product U</a>
+            <a href="#support">Product Q</a>
+            <a href="#tools">Product L</a>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    /* When the user clicks on the button,
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function filterFunction() {
+        var input, filter, ul, li, a, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        div = document.getElementById("myDropdown");
+        a = div.getElementsByTagName("a");
+        for (i = 0; i < a.length; i++) {
+            txtValue = a[i].textContent || a[i].innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                a[i].style.display = "";
+            } else {
+                a[i].style.display = "none";
+            }
+        }
+    }
+</script>
