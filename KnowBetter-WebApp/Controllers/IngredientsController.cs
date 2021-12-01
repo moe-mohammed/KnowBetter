@@ -24,21 +24,6 @@ namespace KnowBetter_WebApp.Controllers
             _context = context;
         }
 
-        //public IActionResult APIView(string? name)
-        //{
-        //    //if (name == null)
-        //    //{
-        //    //    return NotFound();
-        //    //}
-
-        //    var model = new APILinksModel();
-        //    string[] links = new string[] { "Link1", "Link2" };
-        //    model.IngredientName = name;
-        //    model.APILinks = links;
-        //    return View(model);
-        //}
-
-
         // GET: Ingredients
         public async Task<IActionResult> Index()
         {
@@ -48,24 +33,22 @@ namespace KnowBetter_WebApp.Controllers
         // GET: Ingredients/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            var model = new APIResultModel();
             if (id == null)
             {
                 return NotFound();
             }
-
             var ingredient = await _context.Ingredient
                 .FirstOrDefaultAsync(m => m.IngredientId == id);
             if (ingredient == null)
             {
                 return NotFound();
             }
-
-            var model = new APIResultModel();
+            
             APIResults aR = new APIResults();
             aR.APILinks = GetLinks(ingredient);
             model.APIModel = aR;
             model.Ingredient = ingredient;
-            
             return View(model);
         }
 
@@ -181,13 +164,10 @@ namespace KnowBetter_WebApp.Controllers
             string query = ingredient.IngredientName;
             Dictionary<string, string> links = new Dictionary<string, string>();
             int numberOfResults = 5;
-
-
             var webRequest =
                 WebRequest.Create(
                         "https://en.wikipedia.org/w/api.php?action=opensearch&format=xml&namespace=0&limit="+numberOfResults+"&search="+query)
                     as HttpWebRequest;
-
             var s = webRequest.GetResponse().GetResponseStream();
             XmlSerializer serializer = new XmlSerializer(typeof(APIDeserializer.SearchSuggestion));
             APIDeserializer.SearchSuggestion ssJ;
@@ -201,12 +181,6 @@ namespace KnowBetter_WebApp.Controllers
                 }
 
             }
-
-          
-
-                    
-
-
             return links;
         }
        
