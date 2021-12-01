@@ -1,6 +1,4 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<CompareIngredientResult>
 @{
     ViewData["Title"] = "CompareProductResults";
     Layout = "~/Views/Shared/UI_Layout.cshtml";
@@ -14,7 +12,12 @@
 </div>
     
     <div id="resultsDiv">
-        <h1>There are 3 Ingreidents from your avoid ingreident list</h1>
-        <h3>This Div is where the ingrdeint list will be posted</h3>
+        <h1>Ingredients that match your Favorite or Avoid lists:</h1>
+        <div id="ProductCompareResultsContainer">         
+                @foreach (CompareIngredientResult result in Model)
+            {
+                <p class="@result.Result.ToString()">@result.IngredientName</p>
+            }
+        </div>
     </div>
 </div>
