@@ -23,6 +23,10 @@ namespace KnowBetter_WebApp.Controllers
             return View();
 
         }
+        public IActionResult CompareResults()
+        {
+            return View();
+        }
 
         public IActionResult CompareIngDB()
         {
