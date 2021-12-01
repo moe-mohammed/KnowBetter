@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KnowBetter_WebApp.Data;
 using KnowBetter_WebApp.Models;
-using System.Diagnostics;
 
 namespace KnowBetter_WebApp.Controllers
 {
@@ -175,11 +174,13 @@ namespace KnowBetter_WebApp.Controllers
 
         public async Task<IActionResult> CompareProductResult(string[] ingredientNames)
         {
+            //Assume user ID is 1 (for test user)
+            int userID = 1;
+            
             //create list of user avoid ingredient names
             List<string> userAvoidIngredientNames = new List<string>();
-            //Assumes userID is 1 to match test user.
             List<UserAvoidIngredient> avoidIngredients =
-                await _context.UserAvoidIngredient.Where(uAI => uAI.UserId == 1).ToListAsync();
+                await _context.UserAvoidIngredient.Where(uAI => uAI.UserId == userID).ToListAsync();
             foreach (var avoidIngredient in avoidIngredients)
             {
                 Ingredient ingredient = await _context.Ingredient.FirstOrDefaultAsync(ing =>
@@ -190,9 +191,8 @@ namespace KnowBetter_WebApp.Controllers
 
             //create list of user favorite ingredient names
             List<string> userFavoriteIngredientNames = new List<string>();
-            //Assumes userID is 1 to match test user.
             List<UserFavoriteIngredient> favoriteIngredients =
-                await _context.UserFavoriteIngredient.Where(uFI => uFI.UserId == 1).ToListAsync();
+                await _context.UserFavoriteIngredient.Where(uFI => uFI.UserId == userID).ToListAsync();
             foreach (var favoriteIngredient in favoriteIngredients)
             {
                 Ingredient ingredient = await _context.Ingredient.FirstOrDefaultAsync(ing =>
@@ -201,7 +201,8 @@ namespace KnowBetter_WebApp.Controllers
             }
             string[] favIngArray = userFavoriteIngredientNames.ToArray();
 
-            //compare product ingredients to favorite and avoid lists. Place name and comparison result enum into a new results list.
+            //Compare product ingredients to favorite and avoid lists. Place name and comparison result enum into a new results list.
+            //If ingredient name matches both avoid and favorite ingredient, avoid takes precedence.
             List<CompareIngredientResult> resultsList = new List<CompareIngredientResult>();
             foreach (string iName in ingredientNames)
             {
