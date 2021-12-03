@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<KnowBetter_WebApp.Models.Product>
+
 @{
     ViewData["Title"] = "CompareProductSelect";
     Layout = "~/Views/Shared/UI_Layout.cshtml";
@@ -15,13 +16,18 @@
         </button>
         <div id="myDropdown" class="dropdown-content" aria-labelledby="dropdownMenuButton">
             <input type="text" placeholder="Search..." class="dropdown-item" id="myInput" onkeyup="filterFunction()">
+
+
             @foreach (var item in Model)
             {
-                <a asp-action="CompareProductResults" asp-route-id="@item.ProductId">@Html.DisplayFor(ModelItem => item.Brand) @Html.DisplayFor(ModelItem => item.ProductName)</a>
+                <a asp-action="CompareProductResults" asp-route-id="@item.ProductId">@Html.DisplayFor(ModelItem => item.Brand) @Html.DisplayFor(ModelItem => item.ProductName) </a>
             }
+
         </div>
     </div>
 </div>
+
+
 
 
 
