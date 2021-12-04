@@ -15,7 +15,7 @@
         <div id="ProductCompareResultsContainer">         
                 @foreach (CompareIngredientResult result in Model)
             {
-                <span class="@result.Result.ToString()">@result.IngredientName, </span>
+                <span><a href="@Url.Action("Details", new { query = result.IngredientName })" class="@result.Result.ToString()">@result.IngredientName</a>, </span>
             }
         </div>
     </div>
