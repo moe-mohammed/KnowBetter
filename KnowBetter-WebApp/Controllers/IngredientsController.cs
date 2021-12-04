@@ -29,27 +29,12 @@ namespace KnowBetter_WebApp.Controllers
         {
             return View(await _context.Ingredient.ToListAsync());
         }
-
-        // GET: Ingredients/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public ActionResult Details(string query)
         {
             var model = new APIResultModel();
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var ingredient = await _context.Ingredient
-                .FirstOrDefaultAsync(m => m.IngredientId == id);
-            if (ingredient == null)
-            {
-                return NotFound();
-            }
-            
-            APIResults aR = new APIResults();
-            aR.APILinks = GetLinks(ingredient);
-            model.APIModel = aR;
-            model.Ingredient = ingredient;
-            return View(model);
+            model.APILinks = GetLinks(query);
+            model.IngredientName = query;
+            return View(model); 
         }
 
         // GET: Ingredients/Create
@@ -159,10 +144,10 @@ namespace KnowBetter_WebApp.Controllers
             return _context.Ingredient.Any(e => e.IngredientId == id);
         }
 
-        private Dictionary<string,string> GetLinks(Ingredient ingredient)
+        private List<APIResult> GetLinks(string ingredient)
         {
-            string query = ingredient.IngredientName;
-            Dictionary<string, string> links = new Dictionary<string, string>();
+            string query = ingredient;
+            List<APIResult> links = new List<APIResult>();
             int numberOfResults = 5;
             var webRequest =
                 WebRequest.Create(
@@ -177,9 +162,13 @@ namespace KnowBetter_WebApp.Controllers
 
                 foreach (APIDeserializer.SearchSuggestionItem item in ssJ.Section)
                 {
-                    links.Add(item.Text.Value,item.Url.Value);
+                    APIResult aRes = new APIResult();
+                    aRes.LinkName = item.Text.Value;
+                    aRes.LinkUrl = item.Url.Value;
+                    aRes.LinkImage = " ";
+                    //aRes.LinkImage = item.Image.source;
+                    links.Add(aRes);   
                 }
-
             }
             return links;
         }

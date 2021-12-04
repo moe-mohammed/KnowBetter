@@ -11,10 +11,10 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Ingredient.IngredientName)
+            @Html.DisplayNameFor(model => model.IngredientName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Ingredient.IngredientName)
+            @Html.DisplayFor(model => model.IngredientName)
         </dd>
     </dl>
 </div>
@@ -22,10 +22,12 @@
     <p>
         For more information, here are some links from Wikipedia similar to this ingredient:
     </p>
-        @foreach(KeyValuePair<string, string>link in Model.APIModel.APILinks)
-            {
-           <p> <a href="@link.Value">@link.Key</a></p>
-            }
-           
-            <a asp-action="Index">Back to List</a>
-    </div>
+
+
+    @for (int i =0; i < Model.APILinks.Count;i++ )
+    {
+    <p> <a href="@Model.APILinks.ElementAt(i).LinkUrl">@Model.APILinks.ElementAt(i).LinkName</a></p>
+    }
+
+    <a asp-action="Index">Back to List</a>
+</div>

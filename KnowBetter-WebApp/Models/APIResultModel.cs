@@ -8,8 +8,8 @@ namespace KnowBetter_WebApp.Models
 {
     public class APIResultModel
     {
-        public APIResults APIModel { get; set; }
-        public Ingredient Ingredient { get; set; }
+        public List<APIResult> APILinks { get; set; }
+        public string IngredientName { get; set; }
 
     }
 }
