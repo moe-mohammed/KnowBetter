@@ -40,6 +40,7 @@ namespace KnowBetter_WebApp.Controllers
             return RedirectToAction(nameof(FavoriteIngredient));
         }
 
+        //Displays fav ingredient list on page
         public async Task<IActionResult> FavoriteIngredient()
         {
             List<Ingredient> usersFavoriteIngredients = new List<Ingredient>();
@@ -56,9 +57,33 @@ namespace KnowBetter_WebApp.Controllers
             return View(usersFavoriteIngredients);
         }
 
-        public IActionResult AvoidIngredient()
+        [HttpPost, ActionName("DeleteAvoidIngredient")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteAvoidIngredient(int id)
         {
-            return View();
+            var ingredient =
+                await _context.UserAvoidIngredient.FirstOrDefaultAsync(avoidIng =>
+                    avoidIng.IngredientId == id && avoidIng.UserId == userId);
+
+            _context.UserAvoidIngredient.Remove(ingredient);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(AvoidIngredient));
+        }
+
+        public async Task<IActionResult> AvoidIngredient()
+        {
+            List<Ingredient> usersAvoidIngredients = new List<Ingredient>();
+            List<UserAvoidIngredient> avoidIngredients =
+                await _context.UserAvoidIngredient.Where(avoid => avoid.UserId == userId).ToListAsync();
+
+            foreach (UserAvoidIngredient uai in avoidIngredients)
+            {
+                Ingredient ingredient =
+                    await _context.Ingredient.FirstOrDefaultAsync(ing => ing.IngredientId == uai.IngredientId);
+                usersAvoidIngredients.Add(ingredient);
+            }
+
+            return View(usersAvoidIngredients);
         }
 
         public IActionResult IngredientLibrary()
