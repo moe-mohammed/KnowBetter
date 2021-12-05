@@ -26,6 +26,32 @@ namespace KnowBetter_WebApp.Controllers
         {
             return View(await _context.Ingredient.ToListAsync());
         }
+        
+        public async Task<IActionResult> AddFavoriteIngredient(int id)
+        {
+            UserFavoriteIngredient ufi = new UserFavoriteIngredient()
+            {
+                IngredientId = id,
+                UserId = userId
+            };
+
+            _context.UserFavoriteIngredient.Add(ufi);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(FavoriteIngredient));
+        }
+
+        public async Task<IActionResult> AddAvoidIngredient(int id)
+        {
+            UserAvoidIngredient ufi = new UserAvoidIngredient()
+            {
+                IngredientId = id,
+                UserId = userId
+            };
+
+            _context.UserAvoidIngredient.Add(ufi);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(AvoidIngredient));
+        }
 
         [HttpPost, ActionName("DeleteFavoriteIngredient")]
         [ValidateAntiForgeryToken]
@@ -43,18 +69,25 @@ namespace KnowBetter_WebApp.Controllers
         //Displays fav ingredient list on page
         public async Task<IActionResult> FavoriteIngredient()
         {
+            List<Ingredient> allIngredients = await _context.Ingredient.ToListAsync();
             List<Ingredient> usersFavoriteIngredients = new List<Ingredient>();
-            List<UserFavoriteIngredient> favIngredients =
+            List<UserFavoriteIngredient> favoriteIngredients =
                 await _context.UserFavoriteIngredient.Where(fav => fav.UserId == userId).ToListAsync();
 
-            foreach (UserFavoriteIngredient ufi in favIngredients)
+            foreach (UserFavoriteIngredient uai in favoriteIngredients)
             {
                 Ingredient ingredient =
-                    await _context.Ingredient.FirstOrDefaultAsync(ing => ing.IngredientId == ufi.IngredientId);
+                    await _context.Ingredient.FirstOrDefaultAsync(ing => ing.IngredientId == uai.IngredientId);
                 usersFavoriteIngredients.Add(ingredient);
             }
 
-            return View(usersFavoriteIngredients);
+            IngredientResultModel irm = new IngredientResultModel()
+            {
+                AllIngredients = allIngredients,
+                UsersFavOrAvoidIngredients = usersFavoriteIngredients
+            };
+
+            return View(irm);
         }
 
         [HttpPost, ActionName("DeleteAvoidIngredient")]
@@ -72,6 +105,7 @@ namespace KnowBetter_WebApp.Controllers
 
         public async Task<IActionResult> AvoidIngredient()
         {
+            List<Ingredient> allIngredients = await _context.Ingredient.ToListAsync();
             List<Ingredient> usersAvoidIngredients = new List<Ingredient>();
             List<UserAvoidIngredient> avoidIngredients =
                 await _context.UserAvoidIngredient.Where(avoid => avoid.UserId == userId).ToListAsync();
@@ -83,7 +117,13 @@ namespace KnowBetter_WebApp.Controllers
                 usersAvoidIngredients.Add(ingredient);
             }
 
-            return View(usersAvoidIngredients);
+            IngredientResultModel irm = new IngredientResultModel()
+            {
+                AllIngredients = allIngredients,
+                UsersFavOrAvoidIngredients = usersAvoidIngredients
+            };
+
+            return View(irm);
         }
 
         public IActionResult IngredientLibrary()
