@@ -5,24 +5,25 @@
 }
 <h1>Your Favorite Ingredients</h1>
 <div class="container">
-
-    @foreach (var item in Model)
-    {
-
-    
-
-        //  <form asp-action="DeleteFavoriteIngredient">
-         //   <input type="hidden" name="id" value="@item.IngredientId" />
-         //     <input type="submit" value="X" class="btn btn-danger" />
-         //  </form>
-
     <div class="flex-container">
-        <form class="flex-item" asp-action="DeleteFavoriteIngredient">
-            <input type="hidden"name="id" value="@item.IngredientId" />
-            @Html.DisplayFor(modelItem => item.IngredientName)
-            <input type="submit" value="X" class="btn" />
-        </form>
-    </div>
-    }
+        @foreach (var item in Model)
+        {
 
-</div>
+
+
+            //  <form asp-action="DeleteFavoriteIngredient">
+            //   <input type="hidden" name="id" value="@item.IngredientId" />
+            //     <input type="submit" value="X" class="btn btn-danger" />
+            //  </form>
+
+
+            <form class="flex-item" asp-action="DeleteFavoriteIngredient">
+                <input type="hidden" name="id" value="@item.IngredientId" />
+                @Html.DisplayFor(modelItem => item.IngredientName)
+                <input type="submit" value="X" class="btn" />
+            </form>
+
+        }
+    </div>
+
+    </div>
