@@ -36,7 +36,6 @@
     function filterIngredients() {
         var userInput = document.getElementById("searchInput").value.toLowerCase();
         var anchorTags = document.getElementsByClassName("ingredients");
-        console.log(userInput);
         if (userInput !== "") {
             for (var i = 0; i < anchorTags.length; i++) {
                 // for each ingredient, if ingredient name matches user input, set style display to block.
