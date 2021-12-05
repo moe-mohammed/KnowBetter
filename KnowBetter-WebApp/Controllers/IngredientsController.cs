@@ -153,27 +153,30 @@ namespace KnowBetter_WebApp.Controllers
                 WebRequest.Create(
                         "https://en.wikipedia.org/w/api.php?action=opensearch&format=xml&namespace=0&limit="+numberOfResults+"&search="+query)
                     as HttpWebRequest;
-            var s = webRequest.GetResponse().GetResponseStream();
+            var stream = webRequest.GetResponse().GetResponseStream();
             XmlSerializer serializer = new XmlSerializer(typeof(APIDeserializer.SearchSuggestion));
             APIDeserializer.SearchSuggestion ssJ;
-            using (var sr = new StreamReader(s))
+            using (var streamReader = new StreamReader(stream))
             {
-                ssJ = (APIDeserializer.SearchSuggestion)serializer.Deserialize(sr);
+                ssJ = (APIDeserializer.SearchSuggestion)serializer.Deserialize(streamReader);
 
                 foreach (APIDeserializer.SearchSuggestionItem item in ssJ.Section)
                 {
                     APIResult aRes = new APIResult();
                     aRes.LinkName = item.Text.Value;
                     aRes.LinkUrl = item.Url.Value;
-                    aRes.LinkImage = " ";
-                    //aRes.LinkImage = item.Image.source;
+                    if (item.Image != null)
+                    {
+                        aRes.LinkImage = item.Image.source;
+                    }
+                    else
+                    {
+                        aRes.LinkImage = "";
+                    }
                     links.Add(aRes);   
                 }
             }
             return links;
-        }
-       
-    }
-
-      
+        } 
+    }   
     }
