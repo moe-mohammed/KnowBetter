@@ -167,7 +167,15 @@ namespace KnowBetter_WebApp.Controllers
                     aRes.LinkUrl = item.Url.Value;
                     if (item.Image != null)
                     {
-                        aRes.LinkImage = item.Image.source;
+                        string rawImgURL = item.Image.source;
+                        string[] splitUrl = rawImgURL.Split('/');
+                        string finalImg = "http:";
+                        for (int i = 1; i < 9; i++)
+                        {
+                            finalImg += "/" + splitUrl[i];
+                        }
+                        finalImg += "/300px-" + splitUrl[8];
+                        aRes.LinkImage = finalImg;
                     }
                     else
                     {
