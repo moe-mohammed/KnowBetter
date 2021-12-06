@@ -7,9 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KnowBetter_WebApp.Data;
 using KnowBetter_WebApp.Models;
+using System.IO;
+using System.Net;
+using System.Xml.Serialization;
+
 
 namespace KnowBetter_WebApp.Controllers
 {
+
     public class IngredientsController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
@@ -24,23 +29,12 @@ namespace KnowBetter_WebApp.Controllers
         {
             return View(await _context.Ingredient.ToListAsync());
         }
-
-        // GET: Ingredients/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public ActionResult Details(string query)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ingredient = await _context.Ingredient
-                .FirstOrDefaultAsync(m => m.IngredientId == id);
-            if (ingredient == null)
-            {
-                return NotFound();
-            }
-
-            return View(ingredient);
+            var model = new APIResultModel();
+            model.APILinks = GetLinks(query);
+            model.IngredientName = query;
+            return View(model); 
         }
 
         // GET: Ingredients/Create
@@ -149,5 +143,48 @@ namespace KnowBetter_WebApp.Controllers
         {
             return _context.Ingredient.Any(e => e.IngredientId == id);
         }
+
+        private List<APIResult> GetLinks(string ingredient)
+        {
+            string query = ingredient;
+            List<APIResult> links = new List<APIResult>();
+            int numberOfResults = 5;
+            var webRequest =
+                WebRequest.Create(
+                        "https://en.wikipedia.org/w/api.php?action=opensearch&format=xml&namespace=0&limit="+numberOfResults+"&search="+query)
+                    as HttpWebRequest;
+            var stream = webRequest.GetResponse().GetResponseStream();
+            XmlSerializer serializer = new XmlSerializer(typeof(APIDeserializer.SearchSuggestion));
+            APIDeserializer.SearchSuggestion ssJ;
+            using (var streamReader = new StreamReader(stream))
+            {
+                ssJ = (APIDeserializer.SearchSuggestion)serializer.Deserialize(streamReader);
+
+                foreach (APIDeserializer.SearchSuggestionItem item in ssJ.Section)
+                {
+                    APIResult aRes = new APIResult();
+                    aRes.LinkName = item.Text.Value;
+                    aRes.LinkUrl = item.Url.Value;
+                    if (item.Image != null)
+                    {
+                        string rawImgURL = item.Image.source;
+                        string[] splitUrl = rawImgURL.Split('/');
+                        string finalImg = "http:";
+                        for (int i = 1; i < 9; i++)
+                        {
+                            finalImg += "/" + splitUrl[i];
+                        }
+                        finalImg += "/300px-" + splitUrl[8];
+                        aRes.LinkImage = finalImg;
+                    }
+                    else
+                    {
+                        aRes.LinkImage = "";
+                    }
+                    links.Add(aRes);   
+                }
+            }
+            return links;
+        } 
+    }   
     }
-}
