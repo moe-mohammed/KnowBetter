@@ -18,7 +18,6 @@ namespace KnowBetter_WebApp.Controllers
         {
             _context = context;
         }
-       
 
         // GET: Ingredients
         public async Task<IActionResult> Index()
