@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
-
 
 namespace KnowBetter_WebApp.Models
 {
@@ -13,6 +11,4 @@ namespace KnowBetter_WebApp.Models
         public string ProductName { get; set; }
         public string Brand { get; set; }
     }
-   
-
 }

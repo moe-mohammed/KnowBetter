@@ -30,16 +30,16 @@ namespace KnowBetter_WebApp
             services.AddDbContext<KnowBetter_WebAppContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("KnowBetter_WebAppContext")));
 
-            /*try
-            {
-              var sp = services.BuildServiceProvider();
-              KnowBetter_WebAppContext context = sp.GetService<KnowBetter_WebAppContext>();
-               DataSeeder.SeedProducts(context);
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Database does not exist or is not properly initialized. Run 'Update-Database' from package manager console.", e);
-            }  */    
+            //try
+            //{
+            //  var sp = services.BuildServiceProvider();
+            //  KnowBetter_WebAppContext context = sp.GetService<KnowBetter_WebAppContext>();
+            //   DataSeeder.SeedProducts(context);
+            //}
+            //catch (Exception e)
+            //{
+            //    throw new Exception("Database does not exist or is not properly initialized. Run 'Update-Database' from package manager console.", e);
+            //}   
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
