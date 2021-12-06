@@ -21,7 +21,6 @@ namespace KnowBetter_WebApp.Data
                 //Add test user for development purposes
                 /*User testUser = new User
                 {
-                    UserId = "TestUserId",
                     FirstName = "TestFirstName",
                     LastName = "TestLastName",
                     Email = "test@test.com",
