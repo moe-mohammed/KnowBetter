@@ -1,11 +1,10 @@
-﻿@model KnowBetter_WebApp.Models.Ingredient
+﻿@model KnowBetter_WebApp.Models.APIResultModel
 
 @{
     ViewData["Title"] = "Details";
 }
 
 <h1>Details</h1>
-
 <div>
     <h4>Ingredient</h4>
     <hr />
@@ -19,6 +18,17 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.IngredientId">Edit</a> |
+    <p>
+        For more information, here are some links from Wikipedia similar to this ingredient:
+    </p>
+    @for (int i =0; i < Model.APILinks.Count;i++ )
+    {
+
+        if (@Model.APILinks.ElementAt(i).LinkImage != "")
+        {
+            <p> <img src="@Model.APILinks.ElementAt(i).LinkImage" width="300"/></p>
+        }
+            <p><a href="@Model.APILinks.ElementAt(i).LinkUrl">@Model.APILinks.ElementAt(i).LinkName</a></p>
+    }
     <a asp-action="Index">Back to List</a>
 </div>
