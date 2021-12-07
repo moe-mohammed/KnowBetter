@@ -168,14 +168,14 @@ namespace KnowBetter_WebApp.Controllers
                     if (item.Image != null)
                     {
                         string rawImgURL = item.Image.source;
-                        string[] splitUrl = rawImgURL.Split('/');
-                        string finalImg = "http:";
-                        for (int i = 1; i < 9; i++)
-                        {
-                            finalImg += "/" + splitUrl[i];
-                        }
-                        finalImg += "/300px-" + splitUrl[8];
-                        aRes.LinkImage = finalImg;
+                        int start = rawImgURL.LastIndexOf('/');
+                        string urlSubString = rawImgURL.Substring(start);
+                        int indexOfSlash = urlSubString.IndexOf('/') + 1;
+                        int indexOfFirstDash = urlSubString.IndexOf('-');
+                        int lengthOfPictureSize = indexOfFirstDash - indexOfSlash;
+                        string pictureSize = urlSubString.Substring(indexOfSlash, lengthOfPictureSize);
+                        rawImgURL = rawImgURL.Replace(pictureSize, "300px");
+                        aRes.LinkImage = rawImgURL;
                     }
                     else
                     {
