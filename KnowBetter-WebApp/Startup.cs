@@ -33,9 +33,9 @@ namespace KnowBetter_WebApp
 
             //try
             //{
-            //    var sp = services.BuildServiceProvider();
-            //    KnowBetter_WebAppContext context = sp.GetService<KnowBetter_WebAppContext>();
-            //    DataSeeder.SeedProducts(context);
+            //  var sp = services.BuildServiceProvider();
+            //  KnowBetter_WebAppContext context = sp.GetService<KnowBetter_WebAppContext>();
+            //   DataSeeder.SeedProducts(context);
             //}
             //catch (Exception e)
             //{

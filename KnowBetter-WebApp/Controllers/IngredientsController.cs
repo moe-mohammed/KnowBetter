@@ -4,13 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using KnowBetter_WebApp.Data;
 using KnowBetter_WebApp.Models;
-//using ASP;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
+using System.Net;
+using System.Xml.Serialization;
+
 
 namespace KnowBetter_WebApp.Controllers
 {
+
     public class IngredientsController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
@@ -26,6 +30,7 @@ namespace KnowBetter_WebApp.Controllers
         {
             return View(await _context.Ingredient.ToListAsync());
         }
+
         
         public async Task<IActionResult> AddFavoriteIngredient(int id)
         {
@@ -131,22 +136,13 @@ namespace KnowBetter_WebApp.Controllers
             return View();
         }
 
-        // GET: Ingredients/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public ActionResult Details(string query)
+
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ingredient = await _context.Ingredient
-                .FirstOrDefaultAsync(m => m.IngredientId == id);
-            if (ingredient == null)
-            {
-                return NotFound();
-            }
-
-            return View(ingredient);
+            var model = new APIResultModel();
+            model.APILinks = GetLinks(query);
+            model.IngredientName = query;
+            return View(model); 
         }
 
         // GET: Ingredients/Create
@@ -255,5 +251,48 @@ namespace KnowBetter_WebApp.Controllers
         {
             return _context.Ingredient.Any(e => e.IngredientId == id);
         }
+
+        private List<APIResult> GetLinks(string ingredient)
+        {
+            string query = ingredient;
+            List<APIResult> links = new List<APIResult>();
+            int numberOfResults = 5;
+            var webRequest =
+                WebRequest.Create(
+                        "https://en.wikipedia.org/w/api.php?action=opensearch&format=xml&namespace=0&limit="+numberOfResults+"&search="+query)
+                    as HttpWebRequest;
+            var stream = webRequest.GetResponse().GetResponseStream();
+            XmlSerializer serializer = new XmlSerializer(typeof(APIDeserializer.SearchSuggestion));
+            APIDeserializer.SearchSuggestion ssJ;
+            using (var streamReader = new StreamReader(stream))
+            {
+                ssJ = (APIDeserializer.SearchSuggestion)serializer.Deserialize(streamReader);
+
+                foreach (APIDeserializer.SearchSuggestionItem item in ssJ.Section)
+                {
+                    APIResult aRes = new APIResult();
+                    aRes.LinkName = item.Text.Value;
+                    aRes.LinkUrl = item.Url.Value;
+                    if (item.Image != null)
+                    {
+                        string rawImgURL = item.Image.source;
+                        int start = rawImgURL.LastIndexOf('/');
+                        string urlSubString = rawImgURL.Substring(start);
+                        int indexOfSlash = urlSubString.IndexOf('/') + 1;
+                        int indexOfFirstDash = urlSubString.IndexOf('-');
+                        int lengthOfPictureSize = indexOfFirstDash - indexOfSlash;
+                        string pictureSize = urlSubString.Substring(indexOfSlash, lengthOfPictureSize);
+                        rawImgURL = rawImgURL.Replace(pictureSize, "300px");
+                        aRes.LinkImage = rawImgURL;
+                    }
+                    else
+                    {
+                        aRes.LinkImage = "";
+                    }
+                    links.Add(aRes);   
+                }
+            }
+            return links;
+        } 
+    }   
     }
-}
