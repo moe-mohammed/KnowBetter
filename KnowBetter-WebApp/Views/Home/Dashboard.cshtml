@@ -6,9 +6,9 @@
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/UI_Layout.cshtml";
 }
-<h1>Welcom, User1</h1>
+<h1 align="left">Welcome</h1>
 
-<h4><a href="@Url.Action("CompareProductSelect","Products")" class="btn btn-primary" style="background-color: rgba(220, 186, 159, 1)">Product Compare</a></h4>
-<h4><a href="@Url.Action("IngredientLibrary","Ingredients")" class="btn btn-primary" style="background-color: rgba(220, 186, 159, 1)">Ingredient Library></a></h4>
-<h4><a href="@Url.Action("EditProfile","Home")" class="btn btn-primary" style="background-color: rgba(220, 186, 159, 1)">Edit Profile</a></h4>
-<h4><a href="@Url.Action("Logout","Home")" class="btn btn-primary" style="background-color: rgba(220, 186, 159, 1)">Logout</a></h4>
+<h3><a href="@Url.Action("CompareProductSelect","Products")">Product Compare</a></h3>
+<h3><a href="@Url.Action("IngredientLibrary","Ingredients")">Ingredient Library</a></h3>
+<h3><a href="@Url.Action("EditProfile","Home")">Edit Profile</a></h3>
+<h3><a href="@Url.Action("Logout","Home")">Logout</a></h3>
