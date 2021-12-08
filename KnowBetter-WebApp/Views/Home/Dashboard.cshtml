@@ -1,5 +1,14 @@
 ﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+    @model IEnumerable<KnowBetter_WebApp.Models.User>
 *@
+
 @{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/UI_Layout.cshtml";
 }
+<h1>Welcom, User1</h1>
+
+<h4><a href="@Url.Action("CompareProductSelect","Products")" class="btn btn-primary" style="background-color: rgba(220, 186, 159, 1)">Product Compare</a></h4>
+<h4><a href="@Url.Action("IngredientLibrary","Ingredients")" class="btn btn-primary" style="background-color: rgba(220, 186, 159, 1)">Ingredient Library></a></h4>
+<h4><a href="@Url.Action("EditProfile","Home")" class="btn btn-primary" style="background-color: rgba(220, 186, 159, 1)">Edit Profile</a></h4>
+<h4><a href="@Url.Action("Logout","Home")" class="btn btn-primary" style="background-color: rgba(220, 186, 159, 1)">Logout</a></h4>
