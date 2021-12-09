@@ -35,6 +35,11 @@ namespace KnowBetter_WebApp.Controllers
             return View();
         }
 
+        public IActionResult EditProfile()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

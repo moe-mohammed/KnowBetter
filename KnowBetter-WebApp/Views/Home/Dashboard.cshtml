@@ -1,12 +1,8 @@
-﻿@*
-    @model IEnumerable<KnowBetter_WebApp.Models.User>
-*@
-
-@{
+﻿@{
     ViewData["Title"] = "Dashboard";
 }
-<h1 align="left">Welcome, @ViewBag.MyName</h1>
 
+<h1 align="left">Welcome, @ViewBag.MyName</h1>
 <h3><a href="@Url.Action("CompareProductSelect","Products")">Product Compare</a></h3>
 <h3><a href="@Url.Action("IngredientLibrary","Ingredients")">Ingredient Library</a></h3>
 <h3><a href="@Url.Action("EditProfile","Home")">Edit Profile</a></h3>
