@@ -1,0 +1,55 @@
+﻿@model KnowBetter_WebApp.Models.IngredientResultModel
+
+@{
+    ViewData["Title"] = "User's Avoid Ingredients";
+}
+@section addFavAvoidStyles{
+    <link href="@Url.Content("~/css/FavAvoidViewsStyleSheet.css")" rel="stylesheet" type="text/css" />
+}
+<h3>Your Avoid Ingredients</h3>
+
+<div class="container">
+    <div class="flex-container">
+
+        @foreach (var item in Model.UsersFavOrAvoidIngredients)
+        {
+            <form class="flex-item" asp-action="DeleteAvoidIngredient">
+                <input type="hidden" name="id" value="@item.IngredientId" />
+                @Html.DisplayFor(modelItem => item.IngredientName)
+                <input type="submit" value="X" class="btn" />
+            </form>
+        }
+    </div>
+</div>
+
+<div class="ingredients-dropdown">
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="filterIngredients()">
+    <div class="search-results">
+        @foreach (var item in Model.AllIngredients)
+        {
+            <a class="ingredients" asp-action="AddAvoidIngredient" asp-route-id="@item.IngredientId">@Html.DisplayFor(ModelItem => item.IngredientName)</a>
+        }
+    </div>
+</div>
+
+<script>
+    function filterIngredients() {
+        var userInput = document.getElementById("searchInput").value.toLowerCase();
+        var anchorTags = document.getElementsByClassName("ingredients");
+        if (userInput !== "") {
+            for (var i = 0; i < anchorTags.length; i++) {
+                // for each ingredient, if ingredient name matches user input, set style display to block.
+                var ingredientName = (anchorTags[i].textContent || anchorTags[i].innerText).toLowerCase();
+                if (ingredientName.indexOf(userInput) > -1) {
+                    anchorTags[i].style.display = "block";
+                } else {
+                    anchorTags[i].style.display = "none";
+                }
+            }
+        } else {
+            for (var y = 0; y < anchorTags.length; y++) {
+                anchorTags[y].style.display = "none";
+            }
+        }
+    }
+</script> 
