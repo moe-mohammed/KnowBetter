@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using System.IO;
 using System.Net;
 using System.Xml.Serialization;
-
+using Microsoft.AspNetCore.Http;
 
 namespace KnowBetter_WebApp.Controllers
 {
@@ -18,7 +18,7 @@ namespace KnowBetter_WebApp.Controllers
     public class IngredientsController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
-        private readonly int userId = 1;
+        public const string SessionKeyId = "_Id";
 
         public IngredientsController(KnowBetter_WebAppContext context)
         {
@@ -34,10 +34,16 @@ namespace KnowBetter_WebApp.Controllers
         
         public async Task<IActionResult> AddFavoriteIngredient(int id)
         {
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             UserFavoriteIngredient ufi = new UserFavoriteIngredient()
             {
                 IngredientId = id,
-                UserId = userId
+                UserId = Convert.ToInt32(userId)
             };
 
             _context.UserFavoriteIngredient.Add(ufi);
@@ -47,10 +53,16 @@ namespace KnowBetter_WebApp.Controllers
 
         public async Task<IActionResult> AddAvoidIngredient(int id)
         {
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             UserAvoidIngredient ufi = new UserAvoidIngredient()
             {
                 IngredientId = id,
-                UserId = userId
+                UserId = Convert.ToInt32(userId)
             };
 
             _context.UserAvoidIngredient.Add(ufi);
@@ -62,9 +74,15 @@ namespace KnowBetter_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteFavoriteIngredient(int id)
         {
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             var ingredient =
                 await _context.UserFavoriteIngredient.FirstOrDefaultAsync(favIng =>
-                    favIng.IngredientId == id && favIng.UserId == userId);
+                    favIng.IngredientId == id && favIng.UserId == Convert.ToInt32(userId));
 
             _context.UserFavoriteIngredient.Remove(ingredient);
             await _context.SaveChangesAsync();
@@ -74,10 +92,16 @@ namespace KnowBetter_WebApp.Controllers
         //Displays fav ingredient list on page
         public async Task<IActionResult> FavoriteIngredient()
         {
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             List<Ingredient> allIngredients = await _context.Ingredient.ToListAsync();
             List<Ingredient> usersFavoriteIngredients = new List<Ingredient>();
             List<UserFavoriteIngredient> favoriteIngredients =
-                await _context.UserFavoriteIngredient.Where(fav => fav.UserId == userId).ToListAsync();
+                await _context.UserFavoriteIngredient.Where(fav => fav.UserId == Convert.ToInt32(userId)).ToListAsync();
 
             foreach (UserFavoriteIngredient uai in favoriteIngredients)
             {
@@ -99,6 +123,12 @@ namespace KnowBetter_WebApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteAvoidIngredient(int id)
         {
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             var ingredient =
                 await _context.UserAvoidIngredient.FirstOrDefaultAsync(avoidIng =>
                     avoidIng.IngredientId == id && avoidIng.UserId == userId);
@@ -110,10 +140,16 @@ namespace KnowBetter_WebApp.Controllers
 
         public async Task<IActionResult> AvoidIngredient()
         {
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             List<Ingredient> allIngredients = await _context.Ingredient.ToListAsync();
             List<Ingredient> usersAvoidIngredients = new List<Ingredient>();
             List<UserAvoidIngredient> avoidIngredients =
-                await _context.UserAvoidIngredient.Where(avoid => avoid.UserId == userId).ToListAsync();
+                await _context.UserAvoidIngredient.Where(avoid => avoid.UserId == Convert.ToInt32(userId)).ToListAsync();
 
             foreach (UserAvoidIngredient uai in avoidIngredients)
             {
@@ -133,123 +169,21 @@ namespace KnowBetter_WebApp.Controllers
 
         public IActionResult IngredientLibrary()
         {
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             return View();
         }
 
         public ActionResult Details(string query)
-
         {
             var model = new APIResultModel();
             model.APILinks = GetLinks(query);
             model.IngredientName = query;
             return View(model); 
-        }
-
-        // GET: Ingredients/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Ingredients/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IngredientId,IngredientName")] Ingredient ingredient)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(ingredient);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(ingredient);
-        }
-
-        // GET: Ingredients/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ingredient = await _context.Ingredient.FindAsync(id);
-            if (ingredient == null)
-            {
-                return NotFound();
-            }
-            return View(ingredient);
-        }
-
-        // POST: Ingredients/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IngredientId,IngredientName")] Ingredient ingredient)
-        {
-            if (id != ingredient.IngredientId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(ingredient);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!IngredientExists(ingredient.IngredientId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(ingredient);
-        }
-
-        // GET: Ingredients/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ingredient = await _context.Ingredient
-                .FirstOrDefaultAsync(m => m.IngredientId == id);
-            if (ingredient == null)
-            {
-                return NotFound();
-            }
-
-            return View(ingredient);
-        }
-
-        // POST: Ingredients/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var ingredient = await _context.Ingredient.FindAsync(id);
-            _context.Ingredient.Remove(ingredient);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool IngredientExists(int id)
-        {
-            return _context.Ingredient.Any(e => e.IngredientId == id);
         }
 
         private List<APIResult> GetLinks(string ingredient)
