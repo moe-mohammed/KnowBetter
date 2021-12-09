@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @RenderSection("addFavAvoidStyles", false)
+    @RenderSection("Scripts", false)
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -30,7 +31,7 @@
 
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="@Url.Action("Login2","Home")" style="color:white"> Login</a></li>
+                    <li><a href="@Url.Action("Login","Users")" style="color:white"> Login</a></li>
                 </ul>
             </div>
         </div>
