@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/Site_Layout.cshtml";
+    
 }
 
 <h1>Details</h1>
@@ -9,10 +11,10 @@
     <h4>Ingredient</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IngredientName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IngredientName)
         </dd>
     </dl>
@@ -21,14 +23,14 @@
     <p>
         For more information, here are some links from Wikipedia similar to this ingredient:
     </p>
-    @for (int i =0; i < Model.APILinks.Count;i++ )
+    @for (int i = 0; i < Model.APILinks.Count; i++)
     {
 
         if (@Model.APILinks.ElementAt(i).LinkImage != "")
         {
-            <p> <img src="@Model.APILinks.ElementAt(i).LinkImage" width="300"/></p>
+            <p> <img src="@Model.APILinks.ElementAt(i).LinkImage" width="300" /></p>
         }
-            <p><a href="@Model.APILinks.ElementAt(i).LinkUrl">@Model.APILinks.ElementAt(i).LinkName</a></p>
+        <p><a href="@Model.APILinks.ElementAt(i).LinkUrl">@Model.APILinks.ElementAt(i).LinkName</a></p>
     }
-    <a asp-action="Index">Back to List</a>
+   
 </div>

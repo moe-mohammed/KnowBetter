@@ -1,0 +1,45 @@
+﻿.Ibackground {
+    background-image: url("../images/Lotionbackground.PNG");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.body,SIbackground{
+    display:none;
+}
+
+
+/*why did i need another . after row?*/
+.row.align-items-center {
+    margin-top: 10%;
+}
+a.btn.btn-primary {
+    border-color: transparent;
+}
+
+
+@media screen and (max-width: 767px) {
+
+    .Ibackground {
+        display: none;
+    }
+    .SIbackground {
+        background-image: url("../images/GirlWithFaceMaskSmall.jpeg");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+  
+}
