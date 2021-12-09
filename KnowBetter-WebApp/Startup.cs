@@ -27,7 +27,7 @@ namespace KnowBetter_WebApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-
+            services.AddSession();
             services.AddDbContext<KnowBetter_WebAppContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("KnowBetter_WebAppContext")));
 
@@ -61,6 +61,8 @@ namespace KnowBetter_WebApp
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseSession();
 
             app.UseAuthorization();
 
