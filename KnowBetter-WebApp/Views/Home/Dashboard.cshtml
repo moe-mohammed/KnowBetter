@@ -6,7 +6,7 @@
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/Shared/UI_Layout.cshtml";
 }
-<h1 align="left">Welcome</h1>
+<h1 align="left">Welcome, @ViewBag.MyName</h1>
 
 <h3><a href="@Url.Action("CompareProductSelect","Products")">Product Compare</a></h3>
 <h3><a href="@Url.Action("IngredientLibrary","Ingredients")">Ingredient Library</a></h3>

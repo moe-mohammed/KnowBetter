@@ -1,4 +1,5 @@
 ﻿using KnowBetter_WebApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -25,6 +26,7 @@ namespace KnowBetter_WebApp.Controllers
 
         public IActionResult Dashboard()
         {
+            ViewBag.MyName = HttpContext.Session.GetString(key: "_name");
             return View();
         }
 
