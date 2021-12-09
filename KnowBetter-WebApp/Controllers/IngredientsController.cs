@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KnowBetter_WebApp.Data;
+using KnowBetter_WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using KnowBetter_WebApp.Data;
-using KnowBetter_WebApp.Models;
 using System.IO;
 using System.Net;
 using System.Xml.Serialization;
@@ -18,6 +18,7 @@ namespace KnowBetter_WebApp.Controllers
     public class IngredientsController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
+        private readonly int userId = 1;
 
         public IngredientsController(KnowBetter_WebAppContext context)
         {
@@ -29,7 +30,114 @@ namespace KnowBetter_WebApp.Controllers
         {
             return View(await _context.Ingredient.ToListAsync());
         }
+
+        
+        public async Task<IActionResult> AddFavoriteIngredient(int id)
+        {
+            UserFavoriteIngredient ufi = new UserFavoriteIngredient()
+            {
+                IngredientId = id,
+                UserId = userId
+            };
+
+            _context.UserFavoriteIngredient.Add(ufi);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(FavoriteIngredient));
+        }
+
+        public async Task<IActionResult> AddAvoidIngredient(int id)
+        {
+            UserAvoidIngredient ufi = new UserAvoidIngredient()
+            {
+                IngredientId = id,
+                UserId = userId
+            };
+
+            _context.UserAvoidIngredient.Add(ufi);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(AvoidIngredient));
+        }
+
+        [HttpPost, ActionName("DeleteFavoriteIngredient")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteFavoriteIngredient(int id)
+        {
+            var ingredient =
+                await _context.UserFavoriteIngredient.FirstOrDefaultAsync(favIng =>
+                    favIng.IngredientId == id && favIng.UserId == userId);
+
+            _context.UserFavoriteIngredient.Remove(ingredient);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(FavoriteIngredient));
+        }
+
+        //Displays fav ingredient list on page
+        public async Task<IActionResult> FavoriteIngredient()
+        {
+            List<Ingredient> allIngredients = await _context.Ingredient.ToListAsync();
+            List<Ingredient> usersFavoriteIngredients = new List<Ingredient>();
+            List<UserFavoriteIngredient> favoriteIngredients =
+                await _context.UserFavoriteIngredient.Where(fav => fav.UserId == userId).ToListAsync();
+
+            foreach (UserFavoriteIngredient uai in favoriteIngredients)
+            {
+                Ingredient ingredient =
+                    await _context.Ingredient.FirstOrDefaultAsync(ing => ing.IngredientId == uai.IngredientId);
+                usersFavoriteIngredients.Add(ingredient);
+            }
+
+            IngredientResultModel irm = new IngredientResultModel()
+            {
+                AllIngredients = allIngredients,
+                UsersFavOrAvoidIngredients = usersFavoriteIngredients
+            };
+
+            return View(irm);
+        }
+
+        [HttpPost, ActionName("DeleteAvoidIngredient")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteAvoidIngredient(int id)
+        {
+            var ingredient =
+                await _context.UserAvoidIngredient.FirstOrDefaultAsync(avoidIng =>
+                    avoidIng.IngredientId == id && avoidIng.UserId == userId);
+
+            _context.UserAvoidIngredient.Remove(ingredient);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(AvoidIngredient));
+        }
+
+        public async Task<IActionResult> AvoidIngredient()
+        {
+            List<Ingredient> allIngredients = await _context.Ingredient.ToListAsync();
+            List<Ingredient> usersAvoidIngredients = new List<Ingredient>();
+            List<UserAvoidIngredient> avoidIngredients =
+                await _context.UserAvoidIngredient.Where(avoid => avoid.UserId == userId).ToListAsync();
+
+            foreach (UserAvoidIngredient uai in avoidIngredients)
+            {
+                Ingredient ingredient =
+                    await _context.Ingredient.FirstOrDefaultAsync(ing => ing.IngredientId == uai.IngredientId);
+                usersAvoidIngredients.Add(ingredient);
+            }
+
+            IngredientResultModel irm = new IngredientResultModel()
+            {
+                AllIngredients = allIngredients,
+                UsersFavOrAvoidIngredients = usersAvoidIngredients
+            };
+
+            return View(irm);
+        }
+
+        public IActionResult IngredientLibrary()
+        {
+            return View();
+        }
+
         public ActionResult Details(string query)
+
         {
             var model = new APIResultModel();
             model.APILinks = GetLinks(query);
@@ -168,14 +276,14 @@ namespace KnowBetter_WebApp.Controllers
                     if (item.Image != null)
                     {
                         string rawImgURL = item.Image.source;
-                        string[] splitUrl = rawImgURL.Split('/');
-                        string finalImg = "http:";
-                        for (int i = 1; i < 9; i++)
-                        {
-                            finalImg += "/" + splitUrl[i];
-                        }
-                        finalImg += "/300px-" + splitUrl[8];
-                        aRes.LinkImage = finalImg;
+                        int start = rawImgURL.LastIndexOf('/');
+                        string urlSubString = rawImgURL.Substring(start);
+                        int indexOfSlash = urlSubString.IndexOf('/') + 1;
+                        int indexOfFirstDash = urlSubString.IndexOf('-');
+                        int lengthOfPictureSize = indexOfFirstDash - indexOfSlash;
+                        string pictureSize = urlSubString.Substring(indexOfSlash, lengthOfPictureSize);
+                        rawImgURL = rawImgURL.Replace(pictureSize, "300px");
+                        aRes.LinkImage = rawImgURL;
                     }
                     else
                     {

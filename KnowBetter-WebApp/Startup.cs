@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using KnowBetter_WebApp.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,8 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using KnowBetter_WebApp.Data;
+
 
 namespace KnowBetter_WebApp
 {
@@ -40,6 +41,7 @@ namespace KnowBetter_WebApp
             //{
             //    throw new Exception("Database does not exist or is not properly initialized. Run 'Update-Database' from package manager console.", e);
             //}   
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
