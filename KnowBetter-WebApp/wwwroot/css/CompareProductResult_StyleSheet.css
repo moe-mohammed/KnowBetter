@@ -1,0 +1,30 @@
+﻿.wrapper {
+    /*padding: .7px 0 0 0;*/
+}
+
+#CRimg {
+    height: 60%;
+    width: 50%;
+    float: right;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}
+
+#resultsDiv {
+    padding-right: 30px;
+    text-align: center;
+}
+/* Change appearance of ingredient name based on class */
+.Avoid {
+    color: red;
+    font-weight: bold;
+}
+
+.Default {
+}
+
+.Favorite {
+    color: green;
+    font-weight: bold;
+}

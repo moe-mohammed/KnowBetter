@@ -1,0 +1,54 @@
+﻿
+/* Remove the navbar's default margin-bottom and rounded borders */
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    background-color: rgba(109, 153, 166, 1);
+}
+.navbar-inverse .navbar-toggle {
+    border-color: transparent;
+}
+/*#content {
+    background-color: rgba(229, 229, 229, 1);
+}*/
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+    height: 450px
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 20px;
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+footer {
+    background-color: rgba(121, 161, 173, 1);
+    color: white;
+    padding: 15px;
+    height: auto;
+}
+
+.navbar-toggle {
+    border-color: transparent;
+}
+
+.navbar-inverse {
+    border-color: transparent;
+}
+
+
+
+
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    /*for some reason putting .homepageimg is the only way I can change the background color of the content. . .for all screen sizes*/
+    .sidenav, .navbar, .homepageimag {
+        height: auto;
+        padding: 15px;
+    }
+}
+
+
