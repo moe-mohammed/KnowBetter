@@ -1,19 +1,23 @@
 ﻿@model IEnumerable<CompareIngredientResult>
 @{
     ViewData["Title"] = "CompareProductResults";
-    Layout = "~/Views/Shared/UI_Layout.cshtml";
+    Layout = "~/Views/Shared/Site_Layout.cshtml";
+}
+
+@section CompareProductResultsStyle{
+    <link rel="Stylesheet" href="~/css/CompareProductResult_StyleSheet.css" />
 }
 <div class=" CRbackground">
 </div>
 
 <div class=" wrapper">
     <div id="CRimgdiv">
-        <img id="CRimg"src="~/images/GirlWithFacemask.jpeg" />
+        <img id="CRimg" src="~/images/ManReading.jpeg" />
     </div>
     <div id="resultsDiv">
         <h1>Ingredients that match your Favorite or Avoid lists:</h1>
-        <div id="ProductCompareResultsContainer">         
-                @foreach (CompareIngredientResult result in Model)
+        <div id="ProductCompareResultsContainer">
+            @foreach (CompareIngredientResult result in Model)
             {
                 <span><a href="@Url.Action("Details", "Ingredients", new { query = result.IngredientName })" class="@result.Result.ToString()">@result.IngredientName</a>, </span>
             }
