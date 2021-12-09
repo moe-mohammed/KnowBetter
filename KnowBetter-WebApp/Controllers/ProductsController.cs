@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KnowBetter_WebApp.Data;
 using KnowBetter_WebApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,7 @@ namespace KnowBetter_WebApp.Controllers
     public class ProductsController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
+        public const string SessionKeyId = "_Id";
 
         public ProductsController(KnowBetter_WebAppContext context)
         {
@@ -23,6 +25,12 @@ namespace KnowBetter_WebApp.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             return View(await _context.Product.ToListAsync());
         }
 
@@ -153,6 +161,12 @@ namespace KnowBetter_WebApp.Controllers
 
         public async Task<IActionResult> CompareProductSelect()
         {
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             //Get all products and send to View
             return View(await _context.Product.ToListAsync());
         }
@@ -186,8 +200,14 @@ namespace KnowBetter_WebApp.Controllers
         //Compare array of ingredient names to user avoid ingredients and favorite ingredients
         public async Task<IActionResult> CompareProductResult(string[] ingredientNames)
         {
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             //Assume user ID is 1 (for test user)
-            int userID = 1;
+            int userID = Convert.ToInt32(userId);
             
             //create list of user avoid ingredient names
             List<string> userAvoidIngredientNames = new List<string>();
