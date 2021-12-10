@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KnowBetter_WebApp.Models;
 
 
 namespace KnowBetter_WebApp
@@ -30,6 +31,23 @@ namespace KnowBetter_WebApp
             services.AddSession();
             services.AddDbContext<KnowBetter_WebAppContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("KnowBetter_WebAppContext")));
+            EmailServerConfiguration config = new EmailServerConfiguration
+            {
+                SmtpPassword = "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",
+                SmtpServer = "smtp.sendgrid.net",
+                SmtpUsername = "apikey"
+            };
+
+            EmailAddress FromEmailAddress = new EmailAddress
+            {
+                Address = "stephanie.murray@bellevuecollege.edu",
+                Name = "KnowBetter"
+            };
+
+            services.AddSingleton<EmailServerConfiguration>(config);
+            services.AddTransient<IEmailService, MailKitEmailService>();
+            services.AddSingleton<EmailAddress>(FromEmailAddress);
+            services.AddMvc();
 
             //try
             //{
