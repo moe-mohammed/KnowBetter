@@ -3,13 +3,18 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    @RenderSection("Scripts", false)
+    @RenderSection("CompareProductSelectStyle", false)
+    @RenderSection("CompareProductResultsStyle", false)
     @RenderSection("addFavAvoidStyles", false)
+
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="~/css/UI_StyleSheet.css" />
+    <link rel="stylesheet" href="~/css/Site_StyleSheet.css" />
 
 </head>
 <body>
@@ -25,33 +30,24 @@
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a a asp-action="Index" style="color:white">Home</a></li>
+                    <li><a asp-action="Dashboard" asp-controller="Home" style="color:white">Home</a></li>
                     <li><a href="#" style="color:white">About</a></li>
-
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="@Url.Action("Login2","Home")" style="color:white"> Login</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-
     <div id="content" class="container-fluid text-center">
         <div class="col-sm-12 text-center">
-
             <article>
-
                 @RenderBody()
             </article>
-
         </div>
-
     </div>
-
-
+    
     <footer class="container-fluid text-center">
-        <p>Footer Text</p>
+        <p>© KnowBetter, inc. 2021 &nbsp <a href="">Contact Us</a></p>
     </footer>
-
 </body>
 </html>
+
+
