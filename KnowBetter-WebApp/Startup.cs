@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KnowBetter_WebApp.Models;
 
 
 namespace KnowBetter_WebApp
@@ -31,6 +30,7 @@ namespace KnowBetter_WebApp
             services.AddSession();
             services.AddDbContext<KnowBetter_WebAppContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("KnowBetter_WebAppContext")));
+<<<<<<< HEAD
             EmailServerConfiguration config = new EmailServerConfiguration
             {
                 SmtpPassword = "Ask for API Key and put it here",
@@ -48,6 +48,8 @@ namespace KnowBetter_WebApp
             services.AddTransient<IEmailService, MailKitEmailService>();
             services.AddSingleton<EmailAddress>(FromEmailAddress);
             services.AddMvc();
+=======
+>>>>>>> parent of 98fb631 (Added a few images and buttons. Added working contact form.)
 
             //try
             //{

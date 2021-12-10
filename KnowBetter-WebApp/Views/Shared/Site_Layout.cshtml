@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @RenderSection("Scripts", false)
+    @RenderSection("Scripts", false);
     @RenderSection("CompareProductSelectStyle", false)
     @RenderSection("CompareProductResultsStyle", false)
     @RenderSection("addFavAvoidStyles", false)
@@ -26,17 +26,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="#">
-                    <img src="~/images/KnowBetter_logo_navbar.png" height="45" />
-                </a>
+                <a class="navbar-brand" href="#">Logo</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav" style="margin-top:2px;">
-                    <li><a asp-action="Dashboard" asp-controller="Home" style="color:white">
-    <img src="~/images/KnowBetter_home.png" />
-</a></li>
-                    <li><a href="#" >
-<img src="~/images/KnowBetter_about.png" /></a></li>
+                <ul class="nav navbar-nav">
+                    <li><a asp-action="Dashboard" asp-controller="Home" style="color:white">Home</a></li>
+                    <li><a href="#" style="color:white">About</a></li>
                 </ul>
             </div>
         </div>
@@ -50,7 +45,7 @@
     </div>
     
     <footer class="container-fluid text-center">
-        <p>© KnowBetter, inc. 2021 &nbsp <a href="@Url.Action("Index","ContactForm")"> Contact Us</a></p>
+        <p>© KnowBetter, inc. 2021 &nbsp <a href="">Contact Us</a></p>
     </footer>
 </body>
 </html>
