@@ -26,11 +26,8 @@ namespace KnowBetter_WebApp.Controllers
 
         public IActionResult Dashboard()
         {
-            //commented out for testing purposes, must be logged into session for code to work
-            //ViewBag.MyName = HttpContext.Session.GetString(key: "_name");
-
-            //comment out once ready for final testing
-            ViewBag.MyName = "Blake";
+            Debug.WriteLine("From session: " + HttpContext.Session.GetString(key: "_Name"));
+            ViewBag.MyName = HttpContext.Session.GetString(key: "_Name");
 
             return View();
         }
