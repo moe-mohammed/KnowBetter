@@ -33,7 +33,7 @@ namespace KnowBetter_WebApp
                     options.UseSqlServer(Configuration.GetConnectionString("KnowBetter_WebAppContext")));
             EmailServerConfiguration config = new EmailServerConfiguration
             {
-                SmtpPassword = "Ask for this key!",
+                SmtpPassword = "Ask for API Key and put it here",
                 SmtpServer = "smtp.sendgrid.net",
                 SmtpUsername = "apikey"
             };

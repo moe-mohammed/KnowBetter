@@ -16,6 +16,11 @@ namespace KnowBetter_WebApp.Controllers
             return View();
         }
 
+        public ViewResult Thanks()
+        {
+            return View("Thanks");
+        }
+
         private EmailAddress FromAndToEmailAddress;
         private IEmailService EmailService;
         public ContactFormController(EmailAddress _fromAddress,
@@ -35,12 +40,12 @@ namespace KnowBetter_WebApp.Controllers
                     FromAddresses = new List<EmailAddress> { FromAndToEmailAddress },
                     ToAddresses = new List<EmailAddress> { FromAndToEmailAddress },
                     Content = $"Here is your message: Name: {model.Name}, " +
-                        $"Email: {model.Email}, Message: {model.Message}",
-                    Subject = "Contact Form - BasicContactForm App"
+                        $"Email: {model.Email}, \n Message: {model.Message}",
+                    Subject = "Contact Form - KnowBetter App"
                 };
 
                 EmailService.Send(msgToSend);
-                return RedirectToAction("Index");
+                return RedirectToAction("Thanks");
             }
             else
             {
