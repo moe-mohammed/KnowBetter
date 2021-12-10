@@ -26,7 +26,6 @@ namespace KnowBetter_WebApp.Controllers
 
         public IActionResult Dashboard()
         {
-            Debug.WriteLine("From session: " + HttpContext.Session.GetString(key: "_Name"));
             ViewBag.MyName = HttpContext.Session.GetString(key: "_Name");
 
             return View();
