@@ -72,7 +72,7 @@ namespace KnowBetter_WebApp.Controllers
                 {
                     HttpContext.Session.SetInt32(SessionKeyId, user.UserId);
                     HttpContext.Session.SetString(SessionKeyFirstName, user.FirstName);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Dashboard", "Home");
                 }
 
                 ViewBag.error = "Login failed!";
