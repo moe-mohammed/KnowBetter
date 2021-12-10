@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,7 +25,6 @@ namespace KnowBetter_WebApp.Controllers
 
         public IActionResult Dashboard()
         {
-            Debug.WriteLine("From session: " + HttpContext.Session.GetString(key: "_Name"));
             ViewBag.MyName = HttpContext.Session.GetString(key: "_Name");
 
             return View();
