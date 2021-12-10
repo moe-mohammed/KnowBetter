@@ -28,6 +28,7 @@ footer {
     color: white;
     padding: 15px;
     height: auto;
+   
 }
 
 .navbar-toggle {
@@ -49,6 +50,18 @@ footer {
         height: auto;
         padding: 15px;
     }
+
+    footer {
+        display: none;
+    }
 }
+    @media screen and (max-width: 1200px) {
+        footer {
+            display: none;
+        }
+    }
+        
+   
+
 
 
