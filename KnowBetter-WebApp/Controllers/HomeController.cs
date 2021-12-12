@@ -1,4 +1,5 @@
 ﻿using KnowBetter_WebApp.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,6 +13,7 @@ namespace KnowBetter_WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        public const string SessionKeyId = "_Id";
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -20,6 +22,19 @@ namespace KnowBetter_WebApp.Controllers
 
         public IActionResult Index()
         {
+            return View();
+        }
+
+        public IActionResult Dashboard()
+        {
+            ViewBag.MyName = HttpContext.Session.GetString(key: "_Name");
+
+            int? userId = HttpContext.Session.GetInt32(SessionKeyId);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Users");
+            }
+
             return View();
         }
 

@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/Site_Layout.cshtml";
+}
+
+<h1 align="left">Welcome, @ViewBag.MyName</h1>
+<h3><a href="@Url.Action("CompareProductSelect","Products")">Product Compare</a></h3>
+<h3><a href="@Url.Action("IngredientLibrary","Ingredients")">Ingredient Library</a></h3>
+<h3><a href="@Url.Action("EditProfile","Users")">Edit Profile</a></h3>
+<h3><a href="@Url.Action("Login", "Users")">Logout</a></h3>

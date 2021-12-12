@@ -1,0 +1,16 @@
+﻿@model KnowBetter_WebApp.Models.User
+
+@{
+    ViewData["Title"] = "EditProfile";
+}
+<h1 align="left">Edit Profile</h1>
+<br />
+<form align="left">
+    <label for="fname">First name:</label><br />
+    <input type="text" id="fname" name="fname" maxlength="15"><br />
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" maxlength="20"><br />
+    <label for="age">Age:</label><br>
+    <input type="number" id="age" name="age" ><br />
+    <input type="submit" value="Submit">
+</form>
