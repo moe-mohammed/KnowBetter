@@ -27,16 +27,13 @@ namespace KnowBetter_WebApp.Controllers
 
         public IActionResult Dashboard()
         {
+            ViewBag.MyName = HttpContext.Session.GetString(key: "_Name");
+
             int? userId = HttpContext.Session.GetInt32(SessionKeyId);
             if (userId == null)
             {
                 return RedirectToAction("Login", "Users");
             }
-            //commented out for testing purposes, must be logged into session for code to work
-            //ViewBag.MyName = HttpContext.Session.GetString(key: "_name");
-
-            //comment out once ready for final testing
-            ViewBag.MyName = "Blake";
 
             return View();
         }
