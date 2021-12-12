@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using KnowBetter_WebApp.Models;
 
 
 namespace KnowBetter_WebApp
@@ -41,7 +42,23 @@ namespace KnowBetter_WebApp
             //{
             //    throw new Exception("Database does not exist or is not properly initialized. Run 'Update-Database' from package manager console.", e);
             //}   
+            EmailServerConfiguration config = new EmailServerConfiguration
+            {
+                SmtpPassword = "Ask for API Key and put it here",
+                SmtpServer = "smtp.sendgrid.net",
+                SmtpUsername = "apikey"
+            };
 
+            EmailAddress FromEmailAddress = new EmailAddress
+            {
+                Address = "stephanie.murray@bellevuecollege.edu",
+                Name = "KnowBetter"
+            };
+
+            services.AddSingleton<EmailServerConfiguration>(config);
+            services.AddTransient<IEmailService, MailKitEmailService>();
+            services.AddSingleton<EmailAddress>(FromEmailAddress);
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,8 +3,8 @@
     Layout = "~/Views/Shared/Site_Layout.cshtml";
 }
 
-<h1 align="left">Welcome, @ViewBag.MyName</h1>
-<h3><a href="@Url.Action("CompareProductSelect","Products")">Product Compare</a></h3>
-<h3><a href="@Url.Action("IngredientLibrary","Ingredients")">Ingredient Library</a></h3>
-<h3><a href="@Url.Action("EditProfile","Users")">Edit Profile</a></h3>
-<h3><a href="@Url.Action("Login", "Users")">Logout</a></h3>
+<h1 align="center">Welcome, @ViewBag.MyName</h1>
+<h3><a href="@Url.Action("CompareProductSelect","Products")" class="btn btn-primary" style="background-color: rgba(121, 161, 173, 1)">Product Compare</a></h3>
+<h3><a href="@Url.Action("IngredientLibrary","Ingredients")" class="btn btn-primary" style="background-color: rgba(121, 161, 173, 1)">Ingredient Library</a></h3>
+<h3><a href="@Url.Action("EditProfile","Users")"class="btn btn-primary" style="background-color: rgba(121, 161, 173, 1)">Edit Profile</a></h3>
+<h3><a href="@Url.Action("Login", "Users")"class="btn btn-primary" style="        background-color: rgba(220, 186, 159, 1)">Logout</a></h3>

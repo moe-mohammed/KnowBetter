@@ -2,15 +2,11 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/Index_Layout.cshtml";
-}
-@section IndexStyle{
-    <link rel="Stylesheet" href="~/css/Index_StyleSheet.css" />
+    ViewData["Title"] = "Contact Us";
+    Layout = "~/Views/Shared/Site_Layout.cshtml";
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model KnowBetter_WebApp.Models.ContactForm
-
 
 <div class="Ibackground">
 
@@ -30,10 +26,10 @@
             <h3>
                 Contact Us
             </h3>
-            
+
             <h2>Thank you. Your message has been sent.</h2>
 
-
+            <br /><br />
         </div>
 
 
