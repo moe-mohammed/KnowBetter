@@ -25,6 +25,16 @@ namespace KnowBetter_WebApp.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            return View("Login","Users");
+        }
+        public IActionResult SignUp()
+        {
+            return View("SignUp","Users");
+        }
+
+
         public IActionResult Dashboard()
         {
             ViewBag.MyName = HttpContext.Session.GetString(key: "_Name");
