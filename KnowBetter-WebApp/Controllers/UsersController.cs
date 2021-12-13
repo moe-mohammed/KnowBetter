@@ -40,11 +40,21 @@ namespace KnowBetter_WebApp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Sign up method return signup view
+        /// </summary>
         public IActionResult Signup()
         {
             return View();
         }
 
+        /// <summary>
+        /// Sign up action takes user object, determines if it's already in database before adding it,
+        /// then adds new user to daatabase
+        /// </summary>
+        /// <param name="user">User object to add to database.</param>
+        /// <returns>Returns user to dashboard view after successful sign-up,
+        /// or current view after failure</returns>
         // POST: Users/Signup
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -71,17 +81,30 @@ namespace KnowBetter_WebApp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Login function returns login view
+        /// </summary>
         public IActionResult Login()
         {
             return View();
         }
 
+        /// <summary>
+        /// Logout function clears the session and returns logout view
+        /// </summary>
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
             return View("LogOut");
         }
 
+        /// <summary>
+        /// This method takes an email and password to query the database for a user match
+        /// if matched a session/cookie is created for logged in user and they're redirected to dashboard
+        /// </summary>
+        /// <param name="email">Email of user logging in</param>
+        /// <param name="password">Password of user logging in</param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(string email, string password)

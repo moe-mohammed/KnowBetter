@@ -159,6 +159,9 @@ namespace KnowBetter_WebApp.Controllers
             return _context.Product.Any(e => e.ProductId == id);
         }
 
+        /// <summary>
+        /// Returns the select a product view with all products in the databsae
+        /// </summary>
         public async Task<IActionResult> CompareProductSelect()
         {
             int? userId = HttpContext.Session.GetInt32(SessionKeyId);
