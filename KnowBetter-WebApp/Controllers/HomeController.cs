@@ -39,13 +39,12 @@ namespace KnowBetter_WebApp.Controllers
         /// </summary>
         public IActionResult Dashboard()
         {
-            ViewBag.MyName = HttpContext.Session.GetString(key: "_Name");
-
             int? userId = HttpContext.Session.GetInt32(SessionKeyId);
             if (userId == null)
             {
                 return RedirectToAction("Login", "Users");
             }
+            ViewBag.MyName = HttpContext.Session.GetString(key: "_Name");
 
             return View();
         }
