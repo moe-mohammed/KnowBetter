@@ -12,28 +12,24 @@
 <div>
     <h1>Ingredient Details</h1>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Ingredient
-        </dt>
-        <dd class="col-sm-5">
-            @Html.DisplayFor(model => model.IngredientName)
-        </dd>
-    </dl>
+    <h2>
+        @Html.DisplayFor(model => model.IngredientName)
+    </h2>
 </div>
 <div>
     <h5>
         For more information, here are some links from Wikipedia similar to this ingredient:
     </h5>
-
-    @for (int i = 0; i < Model.APILinks.Count; i++)
-    {
-
-        if (@Model.APILinks.ElementAt(i).LinkImage != "")
+    <div class="flex-container">
+        @for (int i = 0; i < Model.APILinks.Count; i++)
         {
-            <p> <img src="@Model.APILinks.ElementAt(i).LinkImage" width="300" /></p>
+            <div class="flex-item">
+                <h3><a href="@Model.APILinks.ElementAt(i).LinkUrl">@Model.APILinks.ElementAt(i).LinkName</a></h3>
+                @if (@Model.APILinks.ElementAt(i).LinkImage != "")
+                {
+                    <p> <img src="@Model.APILinks.ElementAt(i).LinkImage" width="300" /></p>
+                }      
+            </div>
         }
-        <p><a href="@Model.APILinks.ElementAt(i).LinkUrl">@Model.APILinks.ElementAt(i).LinkName</a></p>
-    }
-
+    </div>
 </div>
