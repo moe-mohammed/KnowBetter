@@ -18,19 +18,13 @@ namespace KnowBetter_WebApp.Controllers
     public class IngredientsController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
+        //user id
         public const string SessionKeyId = "_Id";
 
         public IngredientsController(KnowBetter_WebAppContext context)
         {
             _context = context;
         }
-
-        // GET: Ingredients
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Ingredient.ToListAsync());
-        }
-
         
         public async Task<IActionResult> AddFavoriteIngredient(int id)
         {
