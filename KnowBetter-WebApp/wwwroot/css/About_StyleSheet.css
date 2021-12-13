@@ -7,41 +7,39 @@
 
 .box {
     width: 50%;
-    height: 200%;
+    height: 400px;
     position: absolute;
     top: 0;
     left: 0;
     opacity: 1;
-    margin-top: 70px;
+    margin-top: 30px;
     margin-left: 300px;
     z-index: 0;
 }
 
 .stack-top {
     width: 40%;
-    height: 150%;
+    height: 380px;
     z-index: 2;
-    padding-top:20px;
+
     padding-left:10px;
     padding-right:10px;
-    margin-top: 120px;
+    margin-top: 100px;
     margin-left: 360px;
 }
-#smallmediaContent {
-    visibility:hidden;
+
+#smallContent {
+    background: rgba(229, 229, 229, 1);
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    margin-top: 30px;
 }
-
-
-@media only screen (max-width: 800px) { /*6/7/8plus, pixel2, pixel2 xl,Surface Duo*/
-  
-
-
-    #smallmediaContent {
-        visibility:visible;
-        width: 200px;
-        height: 200px;
-        z-index: 2;
-        margin-left: 8px;
-        margin-right: 8px;
+@media (min-width: 999) {
+    div.col-sm-12 hidden-xs {
+        display: none;
     }
 }
+
+
