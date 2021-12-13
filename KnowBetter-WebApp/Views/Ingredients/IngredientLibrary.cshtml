@@ -7,15 +7,16 @@
         Layout = "~/Views/Shared/Site_Layout.cshtml";
     }
 <div>
+    <h1>My Ingredients</h1>
     <h2>
-        <a href="@Url.Action("FavoriteIngredient", "Ingredients")">
+        <a href="@Url.Action("FavoriteIngredient", "Ingredients")" class="btn btn-primary" style="background-color: rgba(121, 161, 173, 1)">
             Favorite Ingredients
         </a>
     </h2>
     <br>
 
     <h2>
-        <a href="@Url.Action("AvoidIngredient", "Ingredients")">
+        <a href="@Url.Action("AvoidIngredient", "Ingredients")" class="btn btn-primary" style="        background-color: rgba(220, 186, 159, 1)">
             Avoid Ingredients
         </a>
     </h2>

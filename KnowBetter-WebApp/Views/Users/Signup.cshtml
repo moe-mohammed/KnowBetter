@@ -1,8 +1,12 @@
 ﻿@model KnowBetter_WebApp.Models.User
 
 @{
-    ViewData["Title"] = "Signup";
+    ViewData["Title"] = "KnowBetter - Signup";
     Layout = "~/Views/Shared/Site_Layout.cshtml";
+}
+
+@section loginSignupStyles{
+    <link href="@Url.Content("~/css/loginSignupStyles.css")" rel="stylesheet" type="text/css" />
 }
 
 <h1>Signup</h1>
