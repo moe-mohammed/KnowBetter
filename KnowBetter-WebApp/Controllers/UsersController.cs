@@ -61,7 +61,7 @@ namespace KnowBetter_WebApp.Controllers
                     await _context.SaveChangesAsync();
                     HttpContext.Session.SetInt32(SessionKeyId, user.UserId);
                     HttpContext.Session.SetString(SessionKeyFirstName, user.FirstName);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Dashboard", "Home");
                 }
 
                 ViewBag.error = "User already exists";
@@ -74,6 +74,12 @@ namespace KnowBetter_WebApp.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return View("LogOut");
         }
 
         [HttpPost]
