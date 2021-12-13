@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<KnowBetter_WebApp.Models.Product>
 
 @{
-    ViewData["Title"] = "CompareProductSelect";
+    ViewData["Title"] = "Product LookUp";
 }
 @section CompareProductSelectStyle{
     <link rel="Stylesheet" href="~/css/CompareProduct_StyleSheet.css" />
-          }
+}
 <div class="DBbackground">
 
 </div>
@@ -24,6 +24,10 @@
         </div>
     </div>
 </div>
+<br />
+<a href="javascript:history.back()" class="btn btn-primary" style="background-color: rgb(215 224 226)">
+    Back
+</a>
 
 <script>
     /* When the user clicks on the button,
