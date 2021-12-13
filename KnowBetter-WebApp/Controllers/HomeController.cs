@@ -34,7 +34,9 @@ namespace KnowBetter_WebApp.Controllers
             return View("SignUp","Users");
         }
 
-
+        /// <summary>
+        /// Checks if user is logged in before returning dashboard view.
+        /// </summary>
         public IActionResult Dashboard()
         {
             ViewBag.MyName = HttpContext.Session.GetString(key: "_Name");
