@@ -14,8 +14,8 @@ namespace KnowBetter_WebApp.Controllers
 {
     public class UsersController : Controller
     {
-        public const string SessionKeyId = "_Id";
-        public const string SessionKeyFirstName = "_Name";
+        private const string SessionKeyId = "_Id";
+        private const string SessionKeyFirstName = "_Name";
 
         private readonly KnowBetter_WebAppContext _context;
 

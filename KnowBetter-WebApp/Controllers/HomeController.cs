@@ -13,7 +13,7 @@ namespace KnowBetter_WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public const string SessionKeyId = "_Id";
+        private const string SessionKeyId = "_Id";
 
         public HomeController(ILogger<HomeController> logger)
         {

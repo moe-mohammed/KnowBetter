@@ -1,5 +1,3 @@
-using System;
-
 namespace KnowBetter_WebApp.Models
 {
     public class ErrorViewModel
