@@ -1,0 +1,40 @@
+﻿.container {
+    width: 200px;
+    height: 200px;
+    position: relative;
+
+}
+
+.box {
+    width: 50%;
+    height: 500px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 1;
+    margin-top: 30px;
+    margin-left: 300px;
+    z-index: 0;
+}
+
+.stack-top {
+    width: 40%;
+    height: 380px;
+    z-index: 2;
+    padding-top: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 90px;
+    margin-left: 360px;
+}
+
+#smallContent {
+    background: rgba(229, 229, 229, 1);
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    margin-top: 30px;
+}
+
+
