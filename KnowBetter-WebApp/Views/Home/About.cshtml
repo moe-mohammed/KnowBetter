@@ -1,0 +1,45 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "About";
+    Layout = "~/Views/Shared/Site_Layout.cshtml";
+}
+@section AboutStyle{
+    <link link rel="stylesheet" href="@Url.Content("~/css/About_StyleSheet.css")" />
+}
+
+
+
+<body>
+    <div class="byecont">
+
+
+        <div class="col-sm-12 hidden-xs">
+            <div class="container">
+                <div class="box" style="background: rgba(220, 186, 159, 1);">
+
+                </div>
+                <div class="box stack-top" style="background: rgba(229, 229, 229, 1);">
+                    <h1> About Us </h1>
+                    <p>KnowBetter supports users with skin sensitivities to be confident in their cosmetics and skincare purchases. </p>
+                    <p>Once you register, use the Ingredient Library to keep track of your favorite ingredients, and ingredients you want to avoid. Search for ingredients to add to your lists.</p>
+                    <p>Use the Product Compare page to search for a product to see which ingredients match your favorite and avoid lists. Select any ingredient in the results to see more about it.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <div  class="col-sm-12 hidden-lg hidden-md hidden-s">
+        <div id="smallContent">
+            <h1> About </h1>
+            <p>KnowBetter supports users with skin sensitivities to be confident in their cosmetics and skincare purchases. </p>
+            <p>Once you register, use the Ingredient Library to keep track of your favorite ingredients, and ingredients you want to avoid. Search for ingredients to add to your lists.</p>
+            <p>Use the Product Compare page to search for a product to see which ingredients match your favorite and avoid lists. Select any ingredient in the results to see more about it.</p>
+        </div>
+    </div>
+</body>
+
+

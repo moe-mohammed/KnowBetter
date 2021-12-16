@@ -9,6 +9,8 @@
     @RenderSection("DetailsStyle", false)
     @RenderSection("addFavAvoidStyles", false)
     @RenderSection("loginSignupStyles", false)
+    @RenderSection("AboutStyle", false)
+
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,8 +37,9 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li><a asp-action="Dashboard" asp-controller="Home" style="color: white; font-family:Readex Pro;margin-top:2px;">Home</a></li>
-                    <li><a href="#" style="color:white;font-family:Readex Pro;margin-top:2px;">About</a></li>
+                    <li><a href="@Url.Action("About","Home")" style="color:white;font-family:Readex Pro;margin-top:2px;">About</a></li>
                     <li><a href="@Url.Action("CompareProductSelect","Products")" style="color:white;font-family:Readex Pro;margin-top:2px;">Product Lookup</a></li>
+
                     <li><a href="@Url.Action("Index","ContactForm")" style="color:white;font-family:Readex Pro;margin-top:2px;">Contact Us</a></li>
                 </ul>
             </div>

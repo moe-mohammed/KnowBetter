@@ -10,9 +10,7 @@
     height: 100%;
     z-index: -1;
 }
-.body, SIbackground {
-    display: none;
-}
+
 
 
 /*why did i need another . after row?*/
