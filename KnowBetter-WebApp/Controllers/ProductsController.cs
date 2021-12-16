@@ -6,7 +6,6 @@ using KnowBetter_WebApp.Data;
 using KnowBetter_WebApp.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -15,7 +14,7 @@ namespace KnowBetter_WebApp.Controllers
     public class ProductsController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
-        public const string SessionKeyId = "_Id";
+        private const string SessionKeyId = "_Id";
 
         public ProductsController(KnowBetter_WebAppContext context)
         {

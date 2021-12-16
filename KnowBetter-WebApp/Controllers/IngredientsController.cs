@@ -19,7 +19,7 @@ namespace KnowBetter_WebApp.Controllers
     {
         private readonly KnowBetter_WebAppContext _context;
         //user id
-        public const string SessionKeyId = "_Id";
+        private const string SessionKeyId = "_Id";
 
         public IngredientsController(KnowBetter_WebAppContext context)
         {
