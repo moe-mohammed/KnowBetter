@@ -1,12 +1,10 @@
 ﻿@model KnowBetter_WebApp.Models.User
 
 @{
-    ViewData["Title"] = "KnowBetter - Logout";
-    Layout = "~/Views/Shared/Site_Layout.cshtml";
+    ViewData["Title"] = "KnowBetter: Logout";
 }
 
 <h1>Logout</h1>
-
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -15,5 +13,5 @@
 </div>
 
 <div>
-    <a href="javascript:history.back()">Back</a>
+    <a href="@Url.Action("Index", "Home")">Home</a>
 </div>

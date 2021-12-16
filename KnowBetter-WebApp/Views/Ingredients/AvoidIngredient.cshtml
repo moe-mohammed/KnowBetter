@@ -1,8 +1,7 @@
 ﻿@model KnowBetter_WebApp.Models.IngredientResultModel
 
 @{
-    ViewData["Title"] = "User's Avoid Ingredients";
-    Layout = "~/Views/Shared/Site_Layout.cshtml";
+    ViewData["Title"] = "KnowBetter: Avoid Ingredients";
 }
 @section addFavAvoidStyles{
     <link link rel="stylesheet" href="@Url.Content("~/css/FavAvoidViewsStyleSheet.css")"/>
@@ -32,6 +31,11 @@
             <a class="ingredients" asp-action="AddAvoidIngredient" asp-route-id="@item.IngredientId">@Html.DisplayFor(ModelItem => item.IngredientName)</a>
         }
     </div>
+</div>
+<div>
+    <a href="@Url.Action("Dashboard", "Home")" class="btn btn-primary" style="background-color: rgb(215 224 226)">
+        Back to Dashboard
+    </a>
 </div>
 
 <script>

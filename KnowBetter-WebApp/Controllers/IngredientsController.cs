@@ -18,6 +18,7 @@ namespace KnowBetter_WebApp.Controllers
     public class IngredientsController : Controller
     {
         private readonly KnowBetter_WebAppContext _context;
+        //user id
         public const string SessionKeyId = "_Id";
 
         public IngredientsController(KnowBetter_WebAppContext context)
@@ -25,13 +26,11 @@ namespace KnowBetter_WebApp.Controllers
             _context = context;
         }
 
-        // GET: Ingredients
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Ingredient.ToListAsync());
-        }
-
-        
+        /// <summary> 
+        /// This function handles adding an ingredient to user's saved list of favorite ingredients.
+        /// </summary>
+        /// <param name="id">The id of the ingredient to favorite.</param>
+        /// <returns>The add favorite ingredient view so user stays on same page.</returns>
         public async Task<IActionResult> AddFavoriteIngredient(int id)
         {
             int? userId = HttpContext.Session.GetInt32(SessionKeyId);
@@ -51,6 +50,11 @@ namespace KnowBetter_WebApp.Controllers
             return RedirectToAction(nameof(FavoriteIngredient));
         }
 
+        /// <summary>
+        /// This function handles adding an ingredient to user's saved list of avoid ingredients.
+        /// </summary>
+        /// <param name="id">The id of ingredient to avoid</param>
+        /// <returns>The avoid favorite ingredient view so user stays on same page.</returns>
         public async Task<IActionResult> AddAvoidIngredient(int id)
         {
             int? userId = HttpContext.Session.GetInt32(SessionKeyId);
@@ -70,6 +74,11 @@ namespace KnowBetter_WebApp.Controllers
             return RedirectToAction(nameof(AvoidIngredient));
         }
 
+        /// <summary>
+        /// This method handles the action of deleting a favorite ingredient
+        /// </summary>
+        /// <param name="id">The id of ingredient to delete</param>
+        /// <returns>Favorite ingredient view so user stays on same page</returns>
         [HttpPost, ActionName("DeleteFavoriteIngredient")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteFavoriteIngredient(int id)
@@ -89,7 +98,11 @@ namespace KnowBetter_WebApp.Controllers
             return RedirectToAction(nameof(FavoriteIngredient));
         }
 
-        //Displays fav ingredient list on page
+        /// <summary>
+        /// This function gets user's list of saved favorite ingredients and all ingredients,
+        /// and returns the favorite ingredient view.
+        /// </summary>
+        /// <returns>Favorite ingredient view.</returns>
         public async Task<IActionResult> FavoriteIngredient()
         {
             int? userId = HttpContext.Session.GetInt32(SessionKeyId);
@@ -119,6 +132,11 @@ namespace KnowBetter_WebApp.Controllers
             return View(irm);
         }
 
+        /// <summary>
+        /// This method handles the action of deleting a avoid ingredient
+        /// </summary>
+        /// <param name="id">The id of ingredient to delete</param>
+        /// <returns>Avoid ingredient view so user stays on same page</returns>
         [HttpPost, ActionName("DeleteAvoidIngredient")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteAvoidIngredient(int id)
@@ -138,6 +156,11 @@ namespace KnowBetter_WebApp.Controllers
             return RedirectToAction(nameof(AvoidIngredient));
         }
 
+        /// <summary>
+        /// This function gets user's list of saved avoid ingredients and all ingredients,
+        /// and returns the avoid ingredient view.
+        /// </summary>
+        /// <returns>Avoid ingredient view.</returns>
         public async Task<IActionResult> AvoidIngredient()
         {
             int? userId = HttpContext.Session.GetInt32(SessionKeyId);
@@ -167,6 +190,9 @@ namespace KnowBetter_WebApp.Controllers
             return View(irm);
         }
 
+        /// <summary>
+        /// Returns ingredient library view.
+        /// </summary>
         public IActionResult IngredientLibrary()
         {
             int? userId = HttpContext.Session.GetInt32(SessionKeyId);
@@ -178,6 +204,12 @@ namespace KnowBetter_WebApp.Controllers
             return View();
         }
 
+        /// <summary>
+        /// Generates API Result model objects using getLinks function and returns the details view.
+        /// Details view entails details of clicked ingredient
+        /// </summary>
+        /// <param name="query">Name of ingredient to query wiki API</param>
+        /// <returns></returns>
         public ActionResult Details(string query)
         {
             var model = new APIResultModel();
@@ -186,6 +218,11 @@ namespace KnowBetter_WebApp.Controllers
             return View(model); 
         }
 
+        /// <summary>
+        /// Takes an ingredient name and queries wiki api for links and pictures
+        /// </summary>
+        /// <param name="query">Name of ingredient to query wiki API</param>
+        /// <returns>A list of API result objects containing links and images</returns>
         private List<APIResult> GetLinks(string ingredient)
         {
             string query = ingredient;

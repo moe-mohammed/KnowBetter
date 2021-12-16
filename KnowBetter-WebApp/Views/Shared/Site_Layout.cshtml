@@ -11,6 +11,7 @@
     @RenderSection("loginSignupStyles", false)
     @RenderSection("AboutStyle", false)
 
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -18,9 +19,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="~/css/Site_StyleSheet.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Readex+Pro">
-
-
 </head>
+
 <body>
     <div class="siteBackground">
         </div>    
@@ -39,7 +39,8 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-action="Dashboard" asp-controller="Home" style="color: white; font-family:Readex Pro;margin-top:2px;">Home</a></li>
                     <li><a href="@Url.Action("About","Home")" style="color:white;font-family:Readex Pro;margin-top:2px;">About</a></li>
-                    <li><a href="@Url.Action("CompareProductSelect","Products")" style="color:white;font-family:Readex Pro;margin-top:2px;">Product LookUp</a></li>
+                    <li><a href="@Url.Action("CompareProductSelect","Products")" style="color:white;font-family:Readex Pro;margin-top:2px;">Product Lookup</a></li>
+
                     <li><a href="@Url.Action("Index","ContactForm")" style="color:white;font-family:Readex Pro;margin-top:2px;">Contact Us</a></li>
                 </ul>
             </div>

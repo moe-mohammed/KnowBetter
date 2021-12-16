@@ -1,11 +1,7 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@{
+    ViewData["Title"] = "KnowBetter: Ingredient Library";
+}
 
-    @{
-        ViewData["Title"] = "IngredientLibrary";
-        Layout = "~/Views/Shared/Site_Layout.cshtml";
-    }
 <div>
     <h1>My Ingredients</h1>
     <h2>
@@ -13,11 +9,17 @@
             Favorite Ingredients
         </a>
     </h2>
-    <br>
 
     <h2>
-        <a href="@Url.Action("AvoidIngredient", "Ingredients")" class="btn btn-primary" style="        background-color: rgba(220, 186, 159, 1)">
+        <a href="@Url.Action("AvoidIngredient", "Ingredients")" class="btn btn-primary" style="background-color: rgba(220, 186, 159, 1)">
             Avoid Ingredients
         </a>
     </h2>
+    <br />
+    <h3>
+        <a href="javascript:history.back()" class="btn btn-primary" style="background-color: rgb(215 224 226)">
+            Back
+        </a>
+    </h3>
+
 </div>
